@@ -624,6 +624,19 @@
 
   <div class="article-list">
 
+
+    <div class="article-item" data-tag="投资" onclick="showPost(22)">
+      <span class="article-num">22</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-04-18</span>
+        </div>
+        <h3 class="article-title">每周大佬说 · 2026-04-18</h3>
+        <p class="article-excerpt">阿贝尔首封股东信 · 黄仁勋反对芯片管制 · 段永平泡泡玛特保险公司开张</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
     <div class="article-item" data-tag="投资" onclick="showPost(21)">
       <span class="article-num">01</span>
       <div class="article-info">
@@ -918,7 +931,7 @@
       <h3>关于我</h3>
       <p>记录工作里的思考、投资中的实践、生活中的发现。坚信好的工具和方法能让每一天都更从容。</p>
       <div class="about-stats">
-        <div class="stat"><span class="stat-num">21</span><span class="stat-label">文章</span></div>
+        <div class="stat"><span class="stat-num">22</span><span class="stat-label">文章</span></div>
         <div class="stat"><span class="stat-num">3</span><span class="stat-label">只基金</span></div>
         <div class="stat"><span class="stat-num">∞</span><span class="stat-label">折腾中</span></div>
       </div>
@@ -942,6 +955,111 @@
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+  {
+    id: 22,
+    title: "每周大佬说 · 2026-04-18",
+    date: "2026-04-18",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    content: `      <p>本周三位大佬都有值得记录的发声——阿贝尔接棒巴菲特发出首封致股东信、黄仁勋罕见公开反对芯片出口管制、段永平"泡泡玛特保险公司"正式开张。以下为要点摘要。</p>
+
+      <h2>📮 巴菲特 / 格雷格·阿贝尔</h2>
+      <h3>2026年致股东信（阿贝尔首封）</h3>
+      <p>2026年2月28日，格雷格·阿贝尔首次以CEO身份发表致股东信。以下是最值得关注的要点：</p>
+
+      <blockquote>
+        <p>"我们做出的决策维护我们的文化，以坦诚和透明的方式沟通，并兑现我们的承诺。"</p>
+        <p>— 格雷格·阿贝尔，伯克希尔-哈撒韦CEO</p>
+      </blockquote>
+
+      <ul>
+        <li><strong>现金储备创纪录：</strong>超过 <strong>3700亿美元</strong>，为历史上最高水平，释放强烈"等待信号"</li>
+        <li><strong>2025年收益率 10.9%</strong>，跑输标普500的17.9%——阿贝尔坦诚："复利的数学对我们不利"，规模是最大的敌人</li>
+        <li><strong>巴菲特仍任董事长：</strong>每周五天办公，股东信改为"感恩节版本"，并非完全放手</li>
+        <li><strong>核心投资逻辑不变：</strong>聚焦充分理解、持久竞争优势、长期经济前景的业务；资本配置纪律严格</li>
+        <li><strong>能源布局前瞻：</strong>BHE电价比全国平均低24%，AI驱动的电力需求是下一个增长点</li>
+      </ul>
+
+      <p><strong>🗣️ 一句话点评：</strong>阿贝尔稳住了伯克希尔的文化底盘，3700亿现金是留给后人的"弹药"。巴菲特未走远，故事还在继续。</p>
+
+      <hr>
+
+      <h2>🔴 黄仁勋</h2>
+      <h3>4月16日 Dwarkesh Patel 播客访谈</h3>
+      <p>这是黄仁勋近期最高密度的一场访谈，涵盖了竞争策略、中国出口管制、AI未来三个核心议题。</p>
+
+      <h4>关于竞争与护城河</h4>
+      <blockquote>
+        <p>"输入是电子，输出是Token，NVIDIA做的就是将电子转化为Token——这个过程不会被商品化。"</p>
+      </blockquote>
+      <ul>
+        <li>CUDA生态是全球最大加速计算平台，覆盖远比AI更广泛的领域（分子动力学、流体力学等）</li>
+        <li>TPU/ASIC是"单点优化"，无法适应新算法演进；Anthropic使用TPU是"例外，不是趋势"——100%来自Anthropic</li>
+        <li>核心哲学：<strong>"做所有必要的事，尽可能少做不必要的事"</strong>——只做"如果NVIDIA不做，就没人会做的事"</li>
+      </ul>
+
+      <h4>关于芯片出口管制——最爆炸的观点</h4>
+      <blockquote>
+        <p>"这种失败者的前提——放弃一个市场——我无法接受。美国不是失败者，我们的产业也不是失败者。"</p>
+      </blockquote>
+      <ul>
+        <li>中国芯片产能占全球主流芯片<strong>60%以上</strong>，SMIC等制造能力充足</li>
+        <li>中国有大量7nm芯片，完全足以运行当前主流AI模型</li>
+        <li>DeepSeek证明出色的算法能带来<strong>10倍性能提升</strong>，远超摩尔定律的25%年增速</li>
+        <li>华为2025年业绩创历史最好，出货数百万芯片</li>
+        <li>最重磅警告：<strong>"50%的AI开发者在中国。被迫离开中国，会加速他们整个AI生态聚焦于内部架构——这正是你政策造成的意外后果"</strong></li>
+      </ul>
+
+      <h4>关于AI与人类工作</h4>
+      <blockquote>
+        <p>"你不会因为AI而失去工作，但你会因为<em>使用AI的人</em>而失去工作。"</p>
+      </blockquote>
+      <p>他以放射科医生为例：约2020年AI预测会第一个取代放射科医生；如今每个放射科平台都由AI驱动——但放射科医生数量反而增加了，原因是过度警告吓退了从业者入行，造成了短缺。</p>
+
+      <p><strong>🗣️ 一句话点评：</strong>黄仁勋罕见直接反对美国政策，既是商业判断（不愿放弃全球最大市场之一），也是对美国科技竞争力的公开警告。这场访谈值得认真读。</p>
+
+      <hr>
+
+      <h2>🟡 段永平</h2>
+      <h3>泡泡玛特"保险公司"正式开张</h3>
+      <p>泡泡玛特因"增速放缓指引"股价较高点跌去30%之际，段永平密集发声，并正式开启他标志性的"卖put"建仓策略。</p>
+
+      <blockquote>
+        <p>"我以前见过很多风靡一时的玩具，比如电子宠物，呼啦圈，魔方……我很好奇我对游戏的理解会不会在泡泡玛特这里再次得到回报。简而言之，我的泡泡玛特保险公司正式开张了。"</p>
+        <p>— 段永平，2026.4.9</p>
+      </blockquote>
+
+      <h4>他的投资操作逻辑</h4>
+      <p>作为"满仓主义者"，段永平不轻易卖出持股。卖put的核心逻辑：</p>
+      <ul>
+        <li>先卖出看跌期权，收取"保费"（权利金）</li>
+        <li>如果股价跌到约定价格，按约定价买入（正好是他愿意建仓的低价）</li>
+        <li>如果股价没跌，白赚保费，相当于"做公益"</li>
+        <li>他在腾讯、苹果身上都曾用过相同策略</li>
+      </ul>
+
+      <h4>他看好的泡泡玛特壁垒</h4>
+      <ul>
+        <li>已建立的用户关注度（品牌）</li>
+        <li>艺术家的签约壁垒</li>
+        <li>全球各地的门店网络</li>
+        <li>创始人王宁及其团队</li>
+      </ul>
+      <p>关于持续性争议，他坦言："大家可以先看个五年十年吧。"</p>
+
+      <h4>其他本周发言</h4>
+      <ul>
+        <li><strong>拼多多：</strong>"我觉得蛮有吸引力的"——按他的估算，扣除现金5年内可回本</li>
+        <li><strong>黄金：</strong>"黄金其实很难理解的，建立在黄金之上的生意其实要搞懂也很难"</li>
+      </ul>
+
+      <p><strong>🗣️ 一句话点评：</strong>段永平在泡泡玛特暴跌时敢于发声，用卖put方式建仓，是典型的"别人恐惧时我贪婪"。他的四大壁垒分析值得反复琢磨。</p>
+
+      <hr>
+      <p><em>数据来源：新浪财经、TechFlow、腾讯新闻、Fortune、证券之星。内容仅供参考，不构成投资建议。</em></p>
+`
+  },
 const posts = [
   {
     id: 21,
