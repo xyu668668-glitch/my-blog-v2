@@ -201,7 +201,7 @@
     }
 
     /* ── Article List ── */
-    .article-list { display: flex; flex-direction: column; }
+    .article-list { display: flex; flex-direction: column; counter-reset: article-num; }
 
     .article-item {
       display: grid;
@@ -212,6 +212,14 @@
       border-bottom: 1px solid var(--border);
       cursor: pointer;
       transition: background 0.2s;
+      counter-increment: article-num;
+    }
+
+.article-item.article-num::before {
+      content: counter(article-num, decimal-leading-zero);
+      font-size: 0.75rem;
+      color: var(--text2);
+      opacity: 0.5;
     }
 
     .article-item:first-child { border-top: 1px solid var(--border); }
@@ -404,9 +412,7 @@
     }
 
     /* Hidden article items */
-    .article-item[data-hidden="true"] { display: none; }
-
-    /* ── About ── */
+    .article-item    /* ── About ── */
     .about-grid {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -597,7 +603,7 @@
   <div class="hero-content">
     <span class="hero-badge">Personal Blog</span>
     <h1>记录生活<br>沉淀思考</h1>
-    <p class="hero-desc">法制工作 · 投资实践 · 效率工具 · 城市探索</p>
+    <p class="hero-desc">投资实践 · 效率工具 · 城市探索</p>
     <a href="#articles" class="hero-scroll">
       <span>向下滚动</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
@@ -614,7 +620,6 @@
   <!-- 标签筛选 -->
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">全部</button>
-    <button class="filter-btn" data-filter="工作" onclick="setFilter('工作')">工作</button>
     <button class="filter-btn" data-filter="投资" onclick="setFilter('投资')">投资</button>
     <button class="filter-btn" data-filter="效率" onclick="setFilter('效率')">效率</button>
     <button class="filter-btn" data-filter="技术" onclick="setFilter('技术')">技术</button>
@@ -626,7 +631,7 @@
 
 
     <div class="article-item" data-tag="投资" onclick="showPost(22)">
-      <span class="article-num">22</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-invest">投资</span>
@@ -638,7 +643,7 @@
       <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
     <div class="article-item" data-tag="投资" onclick="showPost(21)">
-      <span class="article-num">01</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-invest">投资</span>
@@ -650,34 +655,8 @@
       <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" data-tag="工作" onclick="showPost(1)">
-      <span class="article-num">01</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-work">工作</span>
-          <span class="article-date">2026-04-15</span>
-        </div>
-        <h3 class="article-title">用 AI 工具提升行政执法法制审核效率的实践</h3>
-        <p class="article-excerpt">结合法律知识库与 AI 辅助审查工具，探索法制审核工作的数字化转型路径。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="工作" onclick="showPost(2)">
-      <span class="article-num">02</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-work">工作</span>
-          <span class="article-date">2026-04-12</span>
-        </div>
-        <h3 class="article-title">法制审核文书常见错误清单：100个案例复盘</h3>
-        <p class="article-excerpt">整理近三年案卷评查中发现的典型问题，按类别归纳总结，附正确写法参考。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
     <div class="article-item" data-tag="效率" onclick="showPost(3)">
-      <span class="article-num">03</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-eff">效率</span>
@@ -690,7 +669,7 @@
     </div>
 
     <div class="article-item" data-tag="投资" onclick="showPost(4)">
-      <span class="article-num">04</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-invest">投资</span>
@@ -702,21 +681,8 @@
       <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" data-tag="生活" onclick="showPost(5)">
-      <span class="article-num">05</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-life">生活</span>
-          <span class="article-date">2026-04-05</span>
-        </div>
-        <h3 class="article-title">重庆的秋天：一条被忽略的 Citywalk 路线</h3>
-        <p class="article-excerpt">从鹅岭公园到李子坝，穿过老社区和防空洞隧道，用半天时间重新认识这座山城。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
     <div class="article-item" data-tag="效率" onclick="showPost(6)">
-      <span class="article-num">06</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-eff">效率</span>
@@ -729,7 +695,7 @@
     </div>
 
     <div class="article-item" data-tag="投资" onclick="showPost(7)">
-      <span class="article-num">07</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-invest">投资</span>
@@ -742,7 +708,7 @@
     </div>
 
     <div class="article-item" data-tag="技术" onclick="showPost(8)">
-      <span class="article-num">08</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-tech">技术</span>
@@ -754,21 +720,8 @@
       <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" data-tag="读书" onclick="showPost(9)">
-      <span class="article-num">09</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-book">读书</span>
-          <span class="article-date">2026-03-15</span>
-        </div>
-        <h3 class="article-title">读书笔记：《卡片笔记写作法》</h3>
-        <p class="article-excerpt">卢曼用卡片盒写了70本书，方法却出奇简单。笔记不是记录，而是思考的工具。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
     <div class="article-item" data-tag="投资" onclick="showPost(10)">
-      <span class="article-num">10</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-invest">投资</span>
@@ -781,7 +734,7 @@
     </div>
 
     <div class="article-item" data-tag="效率" onclick="showPost(11)">
-      <span class="article-num">11</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-eff">效率</span>
@@ -793,86 +746,9 @@
       <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" data-tag="生活" onclick="showPost(12)">
-      <span class="article-num">12</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-life">生活</span>
-          <span class="article-date">2026-02-28</span>
-        </div>
-        <h3 class="article-title">深夜在洪崖洞对面看重庆：有一种安静叫嘉陵江</h3>
-        <p class="article-excerpt">大剧院江边那块石头，是我在重庆最喜欢的地方。没人，轻轨从头顶过，江面比对面安静十倍。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="技术" onclick="showPost(13)">
-      <span class="article-num">13</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-tech">技术</span>
-          <span class="article-date">2026-02-20</span>
-        </div>
-        <h3 class="article-title">用极空间 NAS 打造全自动化媒体库</h3>
-        <p class="article-excerpt">Radarr+Sonarr+Jellyfin三件套，手机点一下新剧自动下载、自动整理、自动刮削海报封面。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="工作" onclick="showPost(14)">
-      <span class="article-num">14</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-work">工作</span>
-          <span class="article-date">2026-02-15</span>
-        </div>
-        <h3 class="article-title">执法记录仪数据的规范化管理实践</h3>
-        <p class="article-excerpt">执法视音频资料是案件的关键证据。整理归档不规范，调取时找不到，一出问题就是大事。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(15)">
-      <span class="article-num">15</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-02-08</span>
-        </div>
-        <h3 class="article-title">用 Python + AkShare 给自己做一个估值仪表盘</h3>
-        <p class="article-excerpt">PE、PB、股债利差、均线偏离度——四个指标做成一张图，熊市不慌，牛市不浪。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="效率" onclick="showPost(16)">
-      <span class="article-num">16</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-eff">效率</span>
-          <span class="article-date">2026-02-01</span>
-        </div>
-        <h3 class="article-title">晨间routine：公务员版通勤时间的最大化利用</h3>
-        <p class="article-excerpt">单程40分钟地铁，一年250+小时在路上。用这段时间做「输入」，通勤反而成了最期待的时间段。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="生活" onclick="showPost(17)">
-      <span class="article-num">17</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-life">生活</span>
-          <span class="article-date">2026-01-25</span>
-        </div>
-        <h3 class="article-title">一个人吃饭的乐趣：重庆小面地图 2.0</h3>
-        <p class="article-excerpt">一个人不想做饭的时候，最适合钻进街边小面馆。整理了一份重庆小面地图，按辣度分档。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
 
     <div class="article-item" data-tag="技术" onclick="showPost(18)">
-      <span class="article-num">18</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-tech">技术</span>
@@ -884,21 +760,8 @@
       <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" data-tag="读书" onclick="showPost(19)">
-      <span class="article-num">19</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-book">读书</span>
-          <span class="article-date">2026-01-10</span>
-        </div>
-        <h3 class="article-title">读《反脆弱》：从不确定性里获益这件事</h3>
-        <p class="article-excerpt">塔勒布说，脆弱的反面不是坚强，而是从冲击中成长。重新理解了为什么定投策略比择时更合理。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
     <div class="article-item" data-tag="投资" onclick="showPost(20)">
-      <span class="article-num">20</span>
+      <span class="article-num"></span>
       <div class="article-info">
         <div class="article-meta">
           <span class="tag tag-invest">投资</span>
@@ -929,9 +792,9 @@
     <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/avatars/author-avatar.png" class="about-avatar" alt="">
     <div class="about-text">
       <h3>关于我</h3>
-      <p>记录工作里的思考、投资中的实践、生活中的发现。坚信好的工具和方法能让每一天都更从容。</p>
+      <p>记录投资中的实践与生活中的发现。坚信好的工具和方法能让每一天都更从容。</p>
       <div class="about-stats">
-        <div class="stat"><span class="stat-num">22</span><span class="stat-label">文章</span></div>
+        <div class="stat"><span class="stat-num">11</span><span class="stat-label">文章</span></div>
         <div class="stat"><span class="stat-num">3</span><span class="stat-label">只基金</span></div>
         <div class="stat"><span class="stat-num">∞</span><span class="stat-label">折腾中</span></div>
       </div>
@@ -1087,50 +950,6 @@ const posts = [
     `
   },
   {
-    id: 1,
-    title: "用 AI 工具提升行政执法法制审核效率的实践",
-    date: "2026-04-15",
-    tag: "工作",
-    tagClass: "tag-work",
-    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85&fit=crop",
-    content: `
-      <p>行政执法法制审核是基层法制工作的核心环节，涉及大量法律条文的检索、案例的比对以及文书格式的核对。传统方式效率低、易出错，AI 工具的引入可以显著改善这一状况。</p>
-      <h2>核心痛点</h2>
-      <ul>
-        <li>法条检索依赖人工翻查，耗时长</li>
-        <li>同类案件裁量标准不一致</li>
-        <li>文书格式不规范问题反复出现</li>
-      </ul>
-      <h2>AI 辅助方案</h2>
-      <p>通过建立结构化的法律知识库，配合 AI 问答接口，可以实现：法条的快速定位、裁量基准的智能提示、文书格式的自动检查。这套方案已在实际工作中验证，效果明显。</p>
-      <blockquote>工具只是手段，核心还是人。用好 AI 工具的关键在于，知道什么时候用它，什么时候不该用它。</blockquote>
-      <h2>下一步计划</h2>
-      <p>继续完善知识库内容，积累更多典型案例，形成可直接调用的执法参考模板。</p>
-    `
-  },
-  {
-    id: 2,
-    title: "法制审核文书常见错误清单：100个案例复盘",
-    date: "2026-04-12",
-    tag: "工作",
-    tagClass: "tag-work",
-    img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=85&fit=crop",
-    content: `
-      <p>法制审核是行政处罚程序中最关键的环节之一，文书质量直接关系到案件成败。我整理了最近三年案卷评查中发现的典型错误，共性问题远比想象中多。</p>
-      <h2>主体认定类错误</h2>
-      <p>当事人信息填写不全或错误是最常见的问题。身份证号缺失、统一社会信用代码填写不规范、地址不精确等问题在评查卷中反复出现。</p>
-      <blockquote>主体认定错误是硬伤，一经发现即构成程序违法，比内容错误更难补救。</blockquote>
-      <h2>证据链问题</h2>
-      <ul>
-        <li>取证时间逻辑矛盾（早于当事人陈述发生）</li>
-        <li>书证无原件或复制件未注明"与原件一致"</li>
-        <li>询问笔录缺少关键信息（无地点、无告知事项）</li>
-      </ul>
-      <h2>自由裁量适用</h2>
-      <p>罚款金额无裁量说理，或说理内容与裁量基准不对应，是另一类高频问题。行政处罚决定书必须载明裁量依据，否则在行政复议中被撤销的风险极高。</p>
-    `
-  },
-  {
     id: 3,
     title: "Markdown 写作：为什么我彻底放弃了 Word",
     date: "2026-04-10",
@@ -1138,15 +957,31 @@ const posts = [
     tagClass: "tag-eff",
     img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=85&fit=crop",
     content: `
-      <p>Word 是我用了十几年的写作工具，直到我开始频繁遇到这些问题：格式错乱、文件损坏、多设备同步困难、协作冲突。</p>
-      <h2>Word 的三个噩梦</h2>
-      <p>第一个噩梦是版本管理。每次改动都要另存文件，docx-v1、v2、v3、v4……最后自己都分不清哪个是最终版。第二个噩梦是格式刷。一篇文章调好格式，换到另一台电脑打开，字体全变了。第三个噩梦是协作。多人同时编辑一个文档，合并时灾难现场。</p>
-      <blockquote>Word 解决的是排版问题，而不是写作本身。当写作和排版绑定在一起，两者都会变得脆弱。</blockquote>
-      <h2>Markdown 带来的改变</h2>
-      <p>切换到 Markdown 后，写作回归本质：内容。格式变成简单的标记符号，<code>#</code> 是标题，<code>**</code> 是加粗，<code>-</code> 是列表。文件就是一个纯文本，走到哪都能打开，永远不会损坏。</p>
-      <h2>现在的写作流</h2>
-      <p>Typora 写 Markdown → 导出 PDF 或 DOCX → 自动同步到 iCloud。这个流程我跑了两年，再没遇到过格式问题。</p>
-    `
+
+<p>Word 是我用了十几年的写作工具，直到2023年某一天，打开一篇3000字的文章，格式全乱了。那一刻我决定彻底换掉它。</p>
+
+<h2>Word 的三个噩梦</h2>
+<p>第一个噩梦是版本管理。每次改动都要另存文件，docx-v1、v2、v3、v4……最后自己都分不清哪个是最终版。第二个噩梦是格式刷。一篇文章调好格式，换到另一台电脑打开，字体全变了。第三个噩梦是协作。多人同时编辑，合并时灾难现场。</p>
+<blockquote>Word 解决的是排版问题，而不是写作本身。当写作和排版绑定在一起，两者都会变得脆弱。</blockquote>
+
+<h2>Markdown 带来的改变</h2>
+<p>切换到 Markdown 后，写作回归本质：内容。格式变成简单的标记符号，<code>#</code> 是标题，<code>**</code> 是加粗，<code>></code> 是引用。用 Typora 或 Obsidian 写，界面干净，注意力全在文字上。文件是纯文本，任何编辑器都能打开，再也不会遇到兼容性问题。</p>
+
+<h2>AI 改变了写作的方式</h2>
+<p>真正让 Markdown 威力倍增的是 AI 的介入。我的写作流程现在是这样的：</p>
+<ul>
+<li>在 Obsidian 里用 Markdown 写初稿，AI 帮我扩写或压缩某个段落</li>
+<li>写完之后，WorkBuddy 自动把 Markdown 转换成博客格式，发布到网站</li>
+<li>同一篇文章，AI 生成小红书摘要、公众号版本，一次内容多次分发</li>
+<li>读书笔记直接写成 Markdown 卡片，通过 Obsidian 的双向链接积累成知识网络</li>
+</ul>
+<p>过去写一篇 3000 字的文章，光排版就要花半小时。现在写完直接发布，排版由 CSS 自动处理。AI 负责润色和分发，人只需要做最重要的那件事——想清楚要说什么。</p>
+
+<h2>工具栈</h2>
+<p>Obsidian（写稿）→ WorkBuddy（处理与发布）→ GitHub（存储）→ Vercel（托管）。全程不需要 Word，不需要付费软件。</p>
+<blockquote>写作的敌人是工具，Markdown + AI 把敌人消灭了。</blockquote>
+
+`
   },
   {
     id: 4,
@@ -1172,24 +1007,6 @@ const posts = [
     `
   },
   {
-    id: 5,
-    title: "重庆的秋天：一条被忽略的 Citywalk 路线",
-    date: "2026-04-05",
-    tag: "生活",
-    tagClass: "tag-life",
-    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop",
-    content: `
-      <p>在重庆住了这么多年，我第一次认真走了一遍鹅岭到李子坝这条线。9公里的路，穿过老社区、防空洞、废弃铁路，城市的褶皱里藏着太多没注意过的细节。</p>
-      <h2>起点：鹅岭公园</h2>
-      <p>早上六点半的鹅岭，空气里带着潮湿的树叶味道。公园里全是晨练的老人，打太极的、抖空竹的、写水字的。我穿过他们，沿着步道往南走，很快就离开了主路。</p>
-      <h2>防空洞</h2>
-      <p>这段路有意思的地方在于，你会不断和防空洞相遇。它们被改造成了火锅馆、麻将馆、小酒馆。走在里面，凉飕飕的，能闻到隔壁飘来的牛油火锅香味。</p>
-      <blockquote>一座城市的深度，往往藏在它不愿拆掉的老建筑里。</blockquote>
-      <h2>李子坝</h2>
-      <p>到了李子坝观景台已经快中午了，人很多。但我从侧面小路绕到江边，那里几乎没人，坐在石头上发了会儿呆，看着轻轨从头顶的楼里钻出来，又钻进去。</p>
-    `
-  },
-  {
     id: 6,
     title: "Mac mini + 极空间 NAS：我的个人数字中枢",
     date: "2026-03-28",
@@ -1197,15 +1014,37 @@ const posts = [
     tagClass: "tag-eff",
     img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85&fit=crop",
     content: `
-      <p>去年入手了 Mac mini M4，配合极空间 NAS Z4，用了大半年，组合超出预期，记录一下真实使用感受。</p>
-      <h2>为什么选 Mac mini</h2>
-      <p>M4 芯片性能强，功耗低，Mac mini 体积小不占地方，性价比在 Mac 产品线里最高。8G 内存日常办公够用，有条件建议上 16G。</p>
-      <h2>极空间 NAS 的价值</h2>
-      <p>Radarr/Sonarr 自动追剧追电影，Jellyfin 做媒体中心，Jellyseerr 做请求管理。这套自动化媒体库体验比任何流媒体都爽。</p>
-      <h2>数据备份策略</h2>
-      <p>重要文件用 Mac 自带 Time Machine 备份到 NAS，另外用 rclone 定期同步到阿里云 OSS，冷备一份。重要工作文件三重保护。</p>
-      <blockquote>NAS 是那个"买了之后才发现早就需要"的东西。</blockquote>
-    `
+
+<p>2023年我搭了一套"个人数字中枢"：Mac mini M4 作为主力电脑，极空间 NAS Z4 作为数据中心。大半年用下来，这套组合彻底改变了我管理数字生活的方式。这篇文章完整记录我的搭建思路和真实使用体验。</p>
+
+<h2>为什么选 Mac mini M4</h2>
+<p>M4 芯片性能强，功耗极低，Mac mini 体积小不占地方——放在桌面像一个安静的黑盒子，待机功耗不到 10W，却能流畅跑 AI 本地模型。8G 内存日常办公够用，预算充足建议上 16G。这台机器是我每天工作、投资研究、写文章的主力。</p>
+
+<h2>极空间 NAS：我的家庭数据中心</h2>
+<p>NAS（网络附加存储）本质上是一台 24 小时开机的专属文件服务器。极空间 Z4 的优势是自带内网穿透，不需要公网 IP 就能在外面访问家里的文件，手机 App 做得很好。</p>
+<p>我的使用场景：照片自动备份、文件多设备同步、Mac Time Machine 整机备份、重要文件 rclone 双保险同步到阿里云 OSS。</p>
+
+<h2>用 AI 管理电影资源：自动化媒体库</h2>
+<p>这是 NAS 最让我惊喜的部分。三件套搭建全自动媒体库：</p>
+<p><strong>Radarr</strong>：告诉它想看什么电影，它自动去各个 PT 站抓种子、下载、自动整理到对应文件夹。4K、1080P、不同版本全自动处理，告别找种子、等下载、手动整理的繁琐。</p>
+<p><strong>Sonarr</strong>：订阅剧集后，新一集出来自动下载、自动刮削封面和简介，完全不用我打开任何一个网站。</p>
+<p><strong>Jellyfin</strong>：下载好的电影剧集在任何设备播放——电视、手机、平板，界面比流媒体干净，没有广告，没有推荐干扰。</p>
+<p><strong>Jellyseerr</strong>：家人想看什么直接在里面提交，系统自动判断是否有资源，有就自动下载，不需要任何人懂技术。</p>
+
+<h2>AI 自动化：OpenClaw 工作流</h2>
+<p>最让我兴奋的是用 OpenClaw 框架做的自动化脚本：</p>
+<ul>
+<li><strong>地点自动入库</strong>：复制一个地点名 → OpenClaw 监听剪贴板 → 自动添加到苹果地图指南"收藏夹"。整个过程无感，不需要打开任何 App。</li>
+<li><strong>电影资源管理</strong>：Radarr 和 Sonarr 的 API 接入 OpenClaw，想看什么说一句话，脚本自动在 Radarr 里搜索、处理、归档。</li>
+<li><strong>定时发布任务</strong>：每周日晚上 8 点自动拉取三只基金数据，生成投资信号卡，上传图片到 GitHub，更新博客——整个流程不需要我动一根手指。</li>
+</ul>
+<p>AI 接管了"执行"层面的重复劳动，释放出来的时间做更有价值的事情。</p>
+
+<h2>这套系统的真实成本</h2>
+<p>极空间 Z4 + 两块 4T 硬盘约 3000 元。听起来不少，但用来看电影电视，相当于流媒体 5-6 年的订阅费。关键是完全私有、永久拥有、没有广告。它成了我数字生活的控制中心——文件、照片、电影、备份、自动化脚本，全部围绕它运转。</p>
+<blockquote>NAS 是那个"买了之后才发现早就需要"的东西，而 AI 让它从存储设备升级成了智能中枢。</blockquote>
+
+`
   },
   {
     id: 7,
@@ -1215,15 +1054,31 @@ const posts = [
     tagClass: "tag-invest",
     img: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=1200&q=85&fit=crop",
     content: `
-      <p>2024年1月，我开始正式定投三只指数基金：红利低波50、纳指100、标普500。每周固定金额，雷打不动，到现在已经坚持了两年。</p>
-      <h2>第一件事：熊市是最好的课堂</h2>
-      <p>2024年的大部分时间，A股都在震荡下行。账户持续亏损时，心里确实不好受。但回过头看，那段时间积累的份额数量，是后面回血的基础。没有熊市播种，就没有牛市收获。</p>
-      <blockquote>定投的核心逻辑很简单：跌的时候买更多份额，涨的时候享受复利。难的是坚持做到。</blockquote>
-      <h2>第二件事：不要每天看账户</h2>
-      <p>盯盘是散户最大的敌人。看了就容易动，动了一般就后悔。我现在固定每周日晚上看一眼，算一下偏离度和RSI，然后该干嘛干嘛。</p>
-      <h2>第三件事：MA250 是最好的朋友</h2>
-      <p>用均线来判断周期位置，比任何宏观预测都简单。大盘在 MA250 以下，慢慢买；在 MA250 以上，减少定投或者停止。纪律比判断重要。</p>
-    `
+
+<p>2024年1月，我开始正式定投三只指数基金：红利低波50、纳指100、标普500。每周固定金额，雷打不动，到现在已经坚持了两年。这篇文章写写我实际学到了什么，不是理论，是教训。</p>
+
+<h2>第一件事：熊市是最好的课堂</h2>
+<p>2024年的大部分时间，A 股都在震荡下行。账户持续亏损时，心里确实不好受。有一周亏损超过 8%，看到账户的时候觉得自己是不是在做一件蠢事。</p>
+<p>但回过头看，那段时间积累的份额数量，是后面回血的基础。每次下跌，我都在买更多。没有熊市播种，就没有牛市收获。这句话听过无数遍，但只有真的经历过，才能理解它的重量。</p>
+<blockquote>定投的核心逻辑很简单：跌的时候买更多份额，涨的时候享受复利。难的是坚持做到。</blockquote>
+
+<h2>第二件事：不要每天看账户</h2>
+<p>盯盘是散户最大的敌人。看了就容易动，动了一般就后悔。我的经验是，固定每周日晚上看一眼，算一下偏离度和 RSI，然后该干嘛干嘛。</p>
+<p>中间有几次差点想清仓——纳指跌了 10% 的时候、标普回调的时候。每一次我都跟自己说：这是指数基金，不是个股，不存在"公司倒闭"的风险，只要经济还在，指数就会回来。两年下来，这套自我对话帮了我很多。</p>
+
+<h2>第三件事：MA250 是最好的朋友</h2>
+<p>我的定投策略建立在均线偏离度上：价格低于 MA250 越多，越值得加仓；高于均线越多，越要克制。实际操作中，偏离度 0-10% 正常定投；10-20% 加码到 1.5 倍；超过 20% 加码到 2 倍。</p>
+<p>这个策略在 2024 年的 A 股和 2025 年的美股都验证有效。</p>
+
+<h2>第四件事：好的指数基金，不需要选股能力</h2>
+<p>牛市里，连最差的指数基金都能赚钱。问题是大部分人牛市入场，然后熊市割肉。定投的好处是不需要择时——市场高的时候买得少，低的时候买得多，自动完成了高卖低买。买宽基指数，就是在赌国运、赌人类经济会继续增长。</p>
+
+<h2>第五件事：分红是真实的快乐</h2>
+<p>持有红利低波 50 期间，每次分红到账，账户里突然多出一笔"意外收入"，感觉很好。这和股价波动带来的情绪体验完全不同——分红是企业把真金白银分给股东，证明商业模式在创造现金流。</p>
+<p>我的计划：继续每周定投，有需要的时候把分红再投资，持有 10-20 年，等时间的复利发挥作用。</p>
+<blockquote>投资最难的不是选基金，而是管住自己的手。</blockquote>
+
+`
   },
   {
     id: 8,
@@ -1233,38 +1088,40 @@ const posts = [
     tagClass: "tag-tech",
     img: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=85&fit=crop",
     content: `
-      <p>很多人觉得做网站是技术活，其实现在有了 AI 辅助，最难的那部分已经有人帮你做了。这篇文章记录了我从零开始建博客的完整流程。</p>
-      <h2>需要准备的东西</h2>
-      <ul>
-        <li>一个 GitHub 账号（免费）</li>
-        <li>GitHub Desktop（免费，图形界面）</li>
-        <li>一个 Vercel 账号（免费）</li>
-        <li>一个域名（可选，约50元/年）</li>
-      </ul>
-      <h2>核心步骤</h2>
-      <p>第一步用 AI 生成网站代码，第二步用 GitHub Desktop 推送到仓库，第三步 Vercel 读取 GitHub 仓库自动构建部署。全程不需要写代码，不需要敲命令行。</p>
-      <blockquote>不要等准备好了再开始，先跑通最小闭环，再迭代优化。</blockquote>
-      <h2>总费用</h2>
-      <p>如果用 Vercel 免费额度托管，网站本身不花钱。只需要一个域名（可选），50元/年。如果用腾讯云香港服务器，月均30元左右。</p>
-    `
-  },
-  {
-    id: 9,
-    title: "读书笔记：《卡片笔记写作法》",
-    date: "2026-03-15",
-    tag: "读书",
-    tagClass: "tag-book",
-    img: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85&fit=crop",
-    content: `
-      <p>尼克拉斯·卢曼是德国社会学家，他一生写了70本书和400多篇论文，产量惊人。他的秘密是一个装满卡片的盒子——不是文件夹，是一个笔记系统。</p>
-      <h2>核心思想</h2>
-      <p>传统的笔记系统是按主题分类：读书笔记放这里，工作笔记放那里。卢曼的方法不一样：所有笔记都放在一个盒子里，用编号和引用来建立联系。一张卡片引用另一张，卡片之间形成网络，知识自己生长。</p>
-      <blockquote>写作不是把脑子里的东西倒出来，而是通过写作来思考。卡片盒是思考的外骨骼。</blockquote>
-      <h2>实操方法</h2>
-      <p>卢曼笔记法有三个核心动作：<strong>闪念笔记</strong>（随手记下的想法，不加判断）、<strong>文献笔记</strong>（读完书后，用自己的话缩写，附上来源）、<strong>永久笔记</strong>（将闪念和文献整合，形成独立的思考片段，放入卡片盒）。</p>
-      <h2>我的实践</h2>
-      <p>我用 Obsidian 搭了这套系统。目前卡片盒里有200多条笔记，明显感觉到写文章比以前容易了——不是因为我变聪明了，是因为素材一直在积累。</p>
-    `
+
+<p>建这个博客最初只是一个好奇：如果让 AI 从零开始帮我写一个网站，整个过程会有多简单？答案是——比我想象的简单得多。</p>
+
+<h2>我为什么会想建博客</h2>
+<p>起因是投资。2024 年开始定投指数基金，我想找一个地方记录每日的投资信号、市场观察和大佬观点。但小红书写完就沉了，没有积累。后来想，不如自己搭一个。域名便宜，技术门槛因为 AI 大幅降低，更重要的是：这是一个完全属于我的地方，想写什么写什么，想怎么排版怎么排版。</p>
+
+<h2>准备工作：花了我 50 元</h2>
+<p>注册 GitHub 账号（免费）→ 下载 GitHub Desktop（免费）→ 注册 Vercel（免费）→ 买了一个域名 ianning.cn（50 元/年）。整个过程最麻烦的是付款买域名，其他全部免费。</p>
+
+<h2>用 AI 生成网站代码</h2>
+<p>这是整个流程里最神奇的部分。我把需求告诉 AI："我想要一个极简风格的投资/生活博客，深色主题，单页面，不需要后端，数据写在 HTML 文件里，文章用模态框展示。"</p>
+<p>AI 在几秒钟内生成了完整的 HTML 代码，CSS 样式、JavaScript 逻辑、响应式布局全部包含在内。我只需要告诉它哪里想改——字体再小一点、图片换一张、颜色调整一下——AI 立刻改好。</p>
+
+<h2>本地调试 + GitHub 推送</h2>
+<p>拿到代码后，用 GitHub Desktop 把代码推送到 GitHub 仓库。Vercel 自动检测到仓库变化，自动构建、自动部署。访问 ianning.cn，网站已经上线了。</p>
+<p>这个过程第一次走通的时候，花了我大概两小时。现在再发一篇新文章，整个流程只需要几分钟。</p>
+
+<h2>写文章并发布的自动化</h2>
+<p>最让我满意的是这套自动化流程：</p>
+<ul>
+<li>Python 脚本自动拉取基金数据，生成带有 MA250 均线和 RSI 的信号卡图片</li>
+<li>图片自动上传到 GitHub，博客的 index.html 自动更新</li>
+<li>小红书帖子 AI 总结同步发布</li>
+</ul>
+<p>每周我只需要说一句话："出本周投资信号"，剩下的全部自动完成。</p>
+
+<h2>关于域名和托管</h2>
+<p>ianning.cn 在阿里云购买，一年 50 元。Vercel 免费托管，不需要付服务器费用。整个网站的运营成本大约是每年 50 元。如果不想买域名，直接用 ianning.vercel.app 也完全可以访问。</p>
+
+<h2>我学到的最重要的一件事</h2>
+<p>不要等准备好了再开始。先做一个最小可行版本，上线，然后迭代。这个博客的第一版只有 5 篇文章，界面也很简陋。但它能跑、能访问、有人在看——这就足够了。</p>
+<blockquote>完美的开始是开始之后的产物，不是开始之前的前提条件。</blockquote>
+
+`
   },
   {
     id: 10,
@@ -1274,13 +1131,35 @@ const posts = [
     tagClass: "tag-invest",
     img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
     content: `
-      <p>红利低波50是我定投组合里最稳的一只。2024年大盘跌了将近20%，它只跌了8%，股息率还有5.6%。今年分红到账的时候，账户里的数字比我预想的好看。</p>
-      <h2>为什么选它</h2>
-      <p>选它的逻辑很简单：银行股占比高，估值低，每年分红稳定。经济下行期，稳健比成长更重要。而且低波动的特性让它在震荡市里没那么容易让人心态崩溃。</p>
-      <blockquote>红利策略的本质是"收租"逻辑——买股票当房东，等着企业每年给你发钱。</blockquote>
-      <h2>两年的真实持有感受</h2>
-      <p>2024年初开始买，中间跌了两次超过5%，我都加了仓。到年底算了一下，持有收益率+6.2%，跑赢沪深300大概15个点。最重要的是，持有体验很平静，不需要每天盯着看。</p>
-    `
+
+<p>红利低波 50 是我定投组合里最稳的一只。2024 年大盘跌了将近 20%，它只跌了 8%；股息率还有 5.6%。今年分红到账的时候，账户里的数字比我预想的还好看一些。这篇文章说说为什么选它，以及两年持有的真实感受。</p>
+
+<h2>什么是红利低波 50</h2>
+<p>红利低波 50 是中证指数公司编制的 Smart Beta 指数，从沪深 300 中选取股息率最高、波动率最低的 50 只股票。从行业分布看，银行股占比最高（约 40-50%），其次是煤炭、交通运输等低估值板块。银行股占比高，决定了它的两个特点：估值低（PE 通常在 5-7 倍）、分红稳定；成长性弱，弹性不如创业板和科创板。</p>
+
+<h2>关键指标</h2>
+<ul>
+<li><strong>股息率</strong>：5.5-6%，是银行定期存款利率的 2 倍以上</li>
+<li><strong>PE</strong>：5-7 倍，属于市场上估值最低的板块之一</li>
+<li><strong>波动率</strong>：大概是沪深 300 的 60-70%，熊市里跌得少</li>
+<li><strong>近 5 年年化收益</strong>：含分红的总收益约 10-12%，对于如此保守的策略来说相当可观</li>
+</ul>
+
+<h2>为什么选它</h2>
+<p>选它的逻辑很简单：经济下行期，稳健比成长更重要。银行股的商业模式是吃存贷利差，经济不好的时候业务受损，但不会消失——不像成长股，一旦增速放缓，估值和股价会双杀。</p>
+<p>红利策略的本质是"收租"逻辑——买股票当房东，等着企业每年给你发钱。房东不在乎房价短期涨跌，只在乎租金能不能准时到账。</p>
+<blockquote>红利低波 50 是那种"熊市里拿着不慌"的产品——跌的时候少跌，分红的时候有惊喜。</blockquote>
+
+<h2>2024 年熊市验证</h2>
+<p>2024 年 A 股全年弱势，沪深 300 跌幅约 15%，红利低波 50 全年跌幅约 8%，跑赢大盘约 7 个点。中间有过两次超过 5% 的单日下跌，我的反应是加仓。心理层面的帮助也很大：分红每季度到账，给熊市里的持仓体验加了一层保护垫。</p>
+
+<h2>我的操作策略</h2>
+<p>目前把新增定投金额的 40% 放在红利低波 50。策略是：价格跌破 MA250 15% 以上时触发加仓信号；分红到账后不取出，继续买入（红利再投资）；长期目标是账户里的红利类资产能覆盖每月一部分支出。未来如果股息率下降，我会考虑换成红利国企 ETF。</p>
+
+<h2>适合谁</h2>
+<p>红利低波 50 适合：有稳定收入、不追求短期高收益、能接受低波动长期持有的投资者。特别是在熊市里，它的"压舱石"属性会让人心态更好——跌得少，睡得着。</p>
+
+`
   },
   {
     id: 11,
@@ -1300,121 +1179,7 @@ const posts = [
       <p>每天早上在地铁上把当天想到的东西随手记一条"闪念笔记"，晚上回家整理成永久笔记。读书时直接用 Obsidian 做笔记，而不是在书旁边贴便签。</p>
     `
   },
-  {
-    id: 12,
-    title: "深夜在洪崖洞对面看重庆：有一种安静叫嘉陵江",
-    date: "2026-02-28",
-    tag: "生活",
-    tagClass: "tag-life",
-    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop",
-    content: `
-      <p>大剧院旁边下去的那片江边，是我这两年的秘密基地。洪崖洞亮着灯，对岸的千厮门大桥倒影在江面，来往的人不多，可以坐在石头上发很久的呆。</p>
-      <h2>为什么喜欢这里</h2>
-      <p>重庆有意思的地方很多，但大多人太多。太古里、洪崖洞、磁器口，去一次就不想再去第二次。这个江边不一样，来的都是本地人，遛狗的、钓鱼的、谈恋爱的、带着啤酒坐着发呆的。</p>
-      <h2>最佳时间</h2>
-      <p>夏天晚上8点到9点最好。天刚黑透，灯刚亮起来，温度也降下来了。冬天不建议，江边风大。</p>
-      <blockquote>城市里总需要一个地方，可以什么都不想，就坐着看水。</blockquote>
-    `
-  },
-  {
-    id: 13,
-    title: "用极空间 NAS 打造全自动化媒体库",
-    date: "2026-02-20",
-    tag: "技术",
-    tagClass: "tag-tech",
-    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85&fit=crop",
-    content: `
-      <p>极空间 NAS 买回来之后，装了 Radarr、Sonarr、Jellyfin 三件套，用了三个月，彻底告别找资源、下载、整理这个循环。</p>
-      <h2>Radarr：电影自动追</h2>
-      <p>在 Radarr 里搜一部想看的电影，它会自动去各个 PT 站抓种子、下载、自动改名整理到对应文件夹。4K、1080P、不同版本全自动处理。</p>
-      <h2>Sonarr：剧集自动追</h2>
-      <p>Sonarr 追踪订阅的剧集，新一集出来后自动下载、自动刮削封面和简介。不用再打开任何一个网站。</p>
-      <h2>Jellyfin：全设备播放</h2>
-      <p>下载好的电影剧集通过 Jellyfin 在任何设备播放，电视、手机、平板都可以。界面比流媒体还干净，没有广告，没有推荐干扰。</p>
-      <blockquote>这套系统建好之后，看片这件事变成了纯粹的消费，不需要任何操作成本。</blockquote>
-    `
-  },
-  {
-    id: 14,
-    title: "执法记录仪数据的规范化管理实践",
-    date: "2026-02-15",
-    tag: "工作",
-    tagClass: "tag-work",
-    img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=85&fit=crop",
-    content: `
-      <p>执法记录仪的视频资料是行政处罚案件的重要证据链环节。2023年我们遇到了两起行政复议，焦点都在视音频资料的完整性和调取程序的合规性上。</p>
-      <h2>常见问题</h2>
-      <ul>
-        <li>视音频存储分散，案件调取时找不到对应文件</li>
-        <li>文件名不规范，无法快速定位到具体时间地点</li>
-        <li>导出刻录未注明原始载体信息</li>
-        <li>删除前未按规定进行证据封存</li>
-      </ul>
-      <h2>规范化方案</h2>
-      <p>建立统一的命名规则：日期+时间+地点+设备编号。每月固定日期汇总刻录，一案一档，光盘标注清晰，归档到档案室。同时保留原始存储介质备查。</p>
-      <blockquote>执法记录仪的数据管理，看起来是技术问题，实际上是证据意识问题。</blockquote>
-    `
-  },
-  {
-    id: 15,
-    title: "用 Python + AkShare 给自己做一个估值仪表盘",
-    date: "2026-02-08",
-    tag: "投资",
-    tagClass: "tag-invest",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
-    content: `
-      <p>买股票之前先看估值，这是最基本的原则。但估值不是单看一个 PE 就能判断的，需要多个指标综合来看。我用 Python + AkShare 做了一套自己的估值仪表盘。</p>
-      <h2>四个核心指标</h2>
-      <ul>
-        <li><strong>PE（市盈率）</strong>：当前估值历史分位</li>
-        <li><strong>PB（市净率）</strong>：净资产视角的估值</li>
-        <li><strong>股债利差</strong>：沪深300 PE 倒数 - 10年期国债收益率</li>
-        <li><strong>MA250偏离度</strong>：当前价格相对均线的偏离程度</li>
-      </ul>
-      <h2>怎么用</h2>
-      <p>四个指标里三个以上显示低估，就是适合加仓的区间。全部高估，就减少定投或者停止。这个策略帮我躲过了2024年最恐慌的那段下跌——不是预测，而是估值告诉我的。</p>
-      <blockquote>投资不需要预测未来，只需要知道现在贵不贵。</blockquote>
-    `
-  },
-  {
-    id: 16,
-    title: "晨间routine：通勤时间的最大化利用",
-    date: "2026-02-01",
-    tag: "效率",
-    tagClass: "tag-eff",
-    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=85&fit=crop",
-    content: `
-      <p>单程40分钟地铁，来回80分钟。一年250个工作日，就是330多个小时——相当于整整14整天。这个时间如果只是刷手机，亏大了。</p>
-      <h2>我的通勤分工</h2>
-      <ul>
-        <li><strong>去程（40分钟）</strong>：听播客或看书，纯输入</li>
-        <li><strong>回程（40分钟）</strong>：用 Obsidian 整理今天学到的东西，写闪念笔记</li>
-      </ul>
-      <h2>播客推荐（法律+工作相关）</h2>
-      <p>《不合规》《随机波动》《八分》《知本论》——这几个是我反复听的，法律和社会议题交叉，能听到很多平时接触不到的角度。</p>
-      <blockquote>时间不是省出来的，是换来的。把低价值的"杀死时间"换成高价值的"输入积累"，通勤就不是浪费了。</blockquote>
-    `
-  },
-  {
-    id: 17,
-    title: "一个人吃饭的乐趣：重庆小面地图 2.0",
-    date: "2026-01-25",
-    tag: "生活",
-    tagClass: "tag-life",
-    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop",
-    content: `
-      <p>一个人吃饭这件事，我是认真的。约人太麻烦，下馆子一个人点菜不划算，小面刚好——一碗，十几块钱，五分钟吃完，不需要任何人配合。</p>
-      <h2>重庆小面分类</h2>
-      <ul>
-        <li>清汤系：南坪"眼镜面"，汤底干净</li>
-        <li>红油系：解放碑"花市豌杂"，辣度可控</li>
-        <li>糊辣系：沙坪坝"陈耳朵"，糊辣壳香</li>
-      </ul>
-      <h2>一个经验</h2>
-      <p>小面这东西，不要去网红店，不要看点评网站排名。就找那种开着很多年、门口停满外卖小哥的店，味道一定不会差。</p>
-      <blockquote>城市里最真实的味道，往往在那些不起眼的小店里。</blockquote>
-    `
-  },
+
   {
     id: 18,
     title: "AI 帮我写材料这一年：真实体验与避坑",
@@ -1434,22 +1199,6 @@ const posts = [
       <h2>踩过的坑</h2>
       <p><strong>数据别让 AI 编。</strong> 2024年有一次让 AI 帮我填数据，编了一套增长率，被领导一眼看穿。事实性内容必须自己核实。</p>
       <blockquote>AI 是写作的加速器，不是思考的替代品。核心判断永远要自己做。</blockquote>
-    `
-  },
-  {
-    id: 19,
-    title: "读《反脆弱》：从不确定性里获益这件事",
-    date: "2026-01-10",
-    tag: "读书",
-    tagClass: "tag-book",
-    img: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85&fit=crop",
-    content: `
-      <p>塔勒布这本《反脆弱》读了两遍，第一遍读不懂，第二遍拍大腿。反脆弱这个概念，帮我重新理解了为什么定投策略比择时更有道理。</p>
-      <h2>什么是反脆弱</h2>
-      <p>脆弱的东西在冲击下会碎，坚强的东西不变，但反脆弱的东西——你敲它一下，它反而变强了。人体是反脆弱的：适度压力让肌肉生长，过度安逸让机能退化。</p>
-      <h2>和投资的关系</h2>
-      <p>定投策略就是投资里的反脆弱。熊市亏损是冲击，但坚持下来的人积累了大量便宜筹码，等牛市来的时候回血更快、收益更高。反而是那些择时失败、高买低卖的人，是脆弱的。</p>
-      <blockquote>脆弱的系统追求稳定，反脆弱的系统利用波动。</blockquote>
     `
   },
   {
