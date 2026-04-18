@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的博客</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2128;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text2: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #1f6feb;
+      --tag-work: #3b82f6;
+      --tag-invest: #10b981;
+      --tag-life: #f59e0b;
+      --tag-tech: #8b5cf6;
+      --tag-book: #ec4899;
+      --tag-eff: #14b8a6;
+    }
+
+    body {
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=90&fit=crop') center/cover no-repeat;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,17,23,0.2) 0%,
+        rgba(13,17,23,0.4) 50%,
+        rgba(13,17,23,0.92) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text2);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text2);
+      font-size: 0.8rem;
+      animation: bounce 2s infinite;
+      text-decoration: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .hero-scroll svg { width: 20px; height: 20px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(13,17,23,0.75);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Signal Section ── */
+    .signal-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px;
+      margin-top: 60px;
+    }
+
+    .signal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .signal-header h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .signal-date {
+      font-size: 0.8rem;
+      color: var(--text2);
+      background: var(--surface2);
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .signal-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .signal-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .signal-card-label {
+      padding: 12px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    @media (max-width: 900px) {
+      .signal-grid { grid-template-columns: 1fr; }
+      .signal-section { padding: 28px 20px; }
+    }
+
+    /* ── Section ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--text2);
+      max-width: 520px;
+      margin-bottom: 60px;
+    }
+
+    /* ── Article List ── */
+    .article-list { display: flex; flex-direction: column; }
+
+    .article-item {
+      display: grid;
+      grid-template-columns: 72px 1fr 140px;
+      gap: 0 32px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .article-item:first-child { border-top: 1px solid var(--border); }
+
+    .article-item:hover { background: rgba(88,166,255,0.03); }
+
+    .article-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.3s;
+    }
+
+    .article-item:hover .article-num { color: var(--accent); opacity: 0.5; }
+
+    .article-info { min-width: 0; }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 99px;
+      color: #fff;
+    }
+    .tag-work { background: var(--tag-work); }
+    .tag-invest { background: var(--tag-invest); }
+    .tag-life { background: var(--tag-life); }
+    .tag-tech { background: var(--tag-tech); }
+    .tag-book { background: var(--tag-book); }
+    .tag-eff { background: var(--tag-eff); }
+
+    .article-date { font-size: 0.75rem; color: var(--text2); }
+
+    .article-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.4;
+      transition: color 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .article-item:hover .article-title { color: var(--accent); }
+
+    .article-excerpt {
+      font-size: 0.82rem;
+      color: var(--text2);
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .article-thumb {
+      width: 140px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .article-item:hover .article-thumb { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .article-item { grid-template-columns: 48px 1fr; gap: 0 16px; }
+      .article-thumb { display: none; }
+      .article-num { font-size: 2rem; }
+    }
+
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      padding: 6px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 60px;
+    }
+
+    .page-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .page-nums {
+      display: flex;
+      gap: 6px;
+    }
+
+    .page-num {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      padding: 0 6px;
+    }
+
+    .page-num:hover { border-color: var(--accent); color: var(--accent); }
+    .page-num.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .page-ellipsis {
+      color: var(--text2);
+      font-size: 0.85rem;
+      padding: 0 4px;
+    }
+
+    .result-count {
+      text-align: center;
+      color: var(--text2);
+      font-size: 0.8rem;
+      margin-top: 20px;
+      margin-bottom: -20px;
+    }
+
+    /* Hidden article items */
+    .article-item[data-hidden="true"] { display: none; }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+    }
+
+    .about-text h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .about-text p {
+      color: var(--text2);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      max-width: 480px;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 24px;
+    }
+
+    /* ── Post Detail ── */
+    .post-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.85);
+      overflow-y: auto;
+    }
+
+    .post-overlay.active { display: block; }
+
+    .post-modal {
+      max-width: 720px;
+      margin: 60px auto;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .post-modal-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    .post-modal-body { padding: 48px; }
+
+    .post-modal-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .post-modal-title {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.3;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+
+    .post-modal-content { color: var(--text); font-size: 1rem; line-height: 1.9; }
+    .post-modal-content h2 { font-size: 1.3rem; margin: 32px 0 12px; color: #fff; }
+    .post-modal-content p { margin-bottom: 16px; }
+    .post-modal-content ul { margin: 0 0 16px 20px; }
+    .post-modal-content li { margin-bottom: 6px; }
+    .post-modal-content blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 12px 20px;
+      margin: 24px 0;
+      background: var(--surface2);
+      border-radius: 0 8px 8px 0;
+      color: var(--text2);
+      font-style: italic;
+    }
+    .post-modal-content strong { color: #fff; }
+
+    .close-btn {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 201;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover { background: var(--surface2); }
+
+    /* Back btn */
+    .back-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 50;
+    }
+
+    .back-top.show { opacity: 1; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .section { padding: 60px 16px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-avatar { width: 80px; height: 80px; }
+      .post-modal-body { padding: 28px 20px; }
+      .post-modal-title { font-size: 1.5rem; }
+      .post-modal-img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">博客</a>
+  <ul class="nav-links">
+    <li><a href="#articles">文章</a></li>
+    <li><a href="#signal">投资信号</a></li>
+    <li><a href="#about">关于</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Personal Blog</span>
+    <h1>记录生活<br>沉淀思考</h1>
+    <p class="hero-desc">法制工作 · 投资实践 · 效率工具 · 城市探索</p>
+    <a href="#articles" class="hero-scroll">
+      <span>向下滚动</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Articles -->
+<section class="section" id="articles">
+  <p class="section-label">Writing</p>
+  <h2 class="section-title">全部文章</h2>
+  <p class="section-desc">记录工作中的思考、投资里的实践、生活中的发现。</p>
+
+  <!-- 投资信号 -->
+  <div class="signal-section" id="signal">
+    <div class="signal-header">
+      <h3>每日投资信号</h3>
+      <span class="signal-date">2026-04-17</span>
+    </div>
+    <div class="signal-grid">
+      <div class="signal-card">
+        <img src="generated-images/v2_纳指100_2026-04-17.png" alt="纳指100">
+        <div class="signal-card-label">纳指100</div>
+      </div>
+      <div class="signal-card">
+        <img src="generated-images/v2_标普500_2026-04-17.png" alt="标普500">
+        <div class="signal-card-label">标普500</div>
+      </div>
+      <div class="signal-card">
+        <img src="generated-images/v2_红利低波50_2026-04-17.png" alt="红利低波50">
+        <div class="signal-card-label">红利低波50</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 标签筛选 -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">全部</button>
+    <button class="filter-btn" data-filter="工作" onclick="setFilter('工作')">工作</button>
+    <button class="filter-btn" data-filter="投资" onclick="setFilter('投资')">投资</button>
+    <button class="filter-btn" data-filter="效率" onclick="setFilter('效率')">效率</button>
+    <button class="filter-btn" data-filter="技术" onclick="setFilter('技术')">技术</button>
+    <button class="filter-btn" data-filter="生活" onclick="setFilter('生活')">生活</button>
+    <button class="filter-btn" data-filter="读书" onclick="setFilter('读书')">读书</button>
+  </div>
+
+  <div class="article-list">
+
+    <div class="article-item" data-tag="工作" onclick="showPost(1)">
+      <span class="article-num">01</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-work">工作</span>
+          <span class="article-date">2026-04-15</span>
+        </div>
+        <h3 class="article-title">用 AI 工具提升行政执法法制审核效率的实践</h3>
+        <p class="article-excerpt">结合法律知识库与 AI 辅助审查工具，探索法制审核工作的数字化转型路径。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="工作" onclick="showPost(2)">
+      <span class="article-num">02</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-work">工作</span>
+          <span class="article-date">2026-04-12</span>
+        </div>
+        <h3 class="article-title">法制审核文书常见错误清单：100个案例复盘</h3>
+        <p class="article-excerpt">整理近三年案卷评查中发现的典型问题，按类别归纳总结，附正确写法参考。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="效率" onclick="showPost(3)">
+      <span class="article-num">03</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-eff">效率</span>
+          <span class="article-date">2026-04-10</span>
+        </div>
+        <h3 class="article-title">Markdown 写作：为什么我彻底放弃了 Word</h3>
+        <p class="article-excerpt">从 Word 的崩溃与格式灾难，到 Markdown 的简洁与安心。这是一次写作工具的认知升级。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="投资" onclick="showPost(4)">
+      <span class="article-num">04</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-04-08</span>
+        </div>
+        <h3 class="article-title">从零搭建个人投资追踪系统：工具选型与实践</h3>
+        <p class="article-excerpt">用 Python + Web 工具搭建个人投资组合追踪系统，自动化获取行情数据。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="生活" onclick="showPost(5)">
+      <span class="article-num">05</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-life">生活</span>
+          <span class="article-date">2026-04-05</span>
+        </div>
+        <h3 class="article-title">重庆的秋天：一条被忽略的 Citywalk 路线</h3>
+        <p class="article-excerpt">从鹅岭公园到李子坝，穿过老社区和防空洞隧道，用半天时间重新认识这座山城。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="效率" onclick="showPost(6)">
+      <span class="article-num">06</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-eff">效率</span>
+          <span class="article-date">2026-03-28</span>
+        </div>
+        <h3 class="article-title">Mac mini + 极空间 NAS：我的个人数字中枢</h3>
+        <p class="article-excerpt">Mac mini M4 配合极空间 NAS Z4，这套组合用了半年，聊聊真实使用感受。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="投资" onclick="showPost(7)">
+      <span class="article-num">07</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-03-22</span>
+        </div>
+        <h3 class="article-title">定投指数基金两年：我在熊市里学到的五件事</h3>
+        <p class="article-excerpt">2024年初开始定投，中间经历了大幅下跌，也经历了回血。这段经历比任何理财书都更直接。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="技术" onclick="showPost(8)">
+      <span class="article-num">08</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-tech">技术</span>
+          <span class="article-date">2026-03-20</span>
+        </div>
+        <h3 class="article-title">博客上线全流程：零基础也能做网站</h3>
+        <p class="article-excerpt">注册 GitHub、推到远程仓库、Vercel 部署上线——完整流程记录，从零到上线只需要半天。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="读书" onclick="showPost(9)">
+      <span class="article-num">09</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-book">读书</span>
+          <span class="article-date">2026-03-15</span>
+        </div>
+        <h3 class="article-title">读书笔记：《卡片笔记写作法》</h3>
+        <p class="article-excerpt">卢曼用卡片盒写了70本书，方法却出奇简单。笔记不是记录，而是思考的工具。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="投资" onclick="showPost(10)">
+      <span class="article-num">10</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-03-10</span>
+        </div>
+        <h3 class="article-title">红利低波50：熊市里的压舱石</h3>
+        <p class="article-excerpt">银行股高股息+低波动策略，跑赢大盘的同时还能有稳稳的现金流。持有两年的真实感受。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="效率" onclick="showPost(11)">
+      <span class="article-num">11</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-eff">效率</span>
+          <span class="article-date">2026-03-05</span>
+        </div>
+        <h3 class="article-title">Obsidian 入门：我的第二大脑搭建记录</h3>
+        <p class="article-excerpt">从 Notion 迁移到 Obsidian，用双链笔记管理知识。一年积累200+卡片，写作效率明显提升。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="生活" onclick="showPost(12)">
+      <span class="article-num">12</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-life">生活</span>
+          <span class="article-date">2026-02-28</span>
+        </div>
+        <h3 class="article-title">深夜在洪崖洞对面看重庆：有一种安静叫嘉陵江</h3>
+        <p class="article-excerpt">大剧院江边那块石头，是我在重庆最喜欢的地方。没人，轻轨从头顶过，江面比对面安静十倍。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="技术" onclick="showPost(13)">
+      <span class="article-num">13</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-tech">技术</span>
+          <span class="article-date">2026-02-20</span>
+        </div>
+        <h3 class="article-title">用极空间 NAS 打造全自动化媒体库</h3>
+        <p class="article-excerpt">Radarr+Sonarr+Jellyfin三件套，手机点一下新剧自动下载、自动整理、自动刮削海报封面。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="工作" onclick="showPost(14)">
+      <span class="article-num">14</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-work">工作</span>
+          <span class="article-date">2026-02-15</span>
+        </div>
+        <h3 class="article-title">执法记录仪数据的规范化管理实践</h3>
+        <p class="article-excerpt">执法视音频资料是案件的关键证据。整理归档不规范，调取时找不到，一出问题就是大事。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="投资" onclick="showPost(15)">
+      <span class="article-num">15</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-02-08</span>
+        </div>
+        <h3 class="article-title">用 Python + AkShare 给自己做一个估值仪表盘</h3>
+        <p class="article-excerpt">PE、PB、股债利差、均线偏离度——四个指标做成一张图，熊市不慌，牛市不浪。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="效率" onclick="showPost(16)">
+      <span class="article-num">16</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-eff">效率</span>
+          <span class="article-date">2026-02-01</span>
+        </div>
+        <h3 class="article-title">晨间routine：公务员版通勤时间的最大化利用</h3>
+        <p class="article-excerpt">单程40分钟地铁，一年250+小时在路上。用这段时间做「输入」，通勤反而成了最期待的时间段。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="生活" onclick="showPost(17)">
+      <span class="article-num">17</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-life">生活</span>
+          <span class="article-date">2026-01-25</span>
+        </div>
+        <h3 class="article-title">一个人吃饭的乐趣：重庆小面地图 2.0</h3>
+        <p class="article-excerpt">一个人不想做饭的时候，最适合钻进街边小面馆。整理了一份重庆小面地图，按辣度分档。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="技术" onclick="showPost(18)">
+      <span class="article-num">18</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-tech">技术</span>
+          <span class="article-date">2026-01-18</span>
+        </div>
+        <h3 class="article-title">AI 帮我写材料这一年：真实体验与避坑</h3>
+        <p class="article-excerpt">把 AI 用在工作写作里整整一年，从最初的新鲜到现在的日常依赖，说说哪些真的有用，哪些是坑。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="读书" onclick="showPost(19)">
+      <span class="article-num">19</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-book">读书</span>
+          <span class="article-date">2026-01-10</span>
+        </div>
+        <h3 class="article-title">读《反脆弱》：从不确定性里获益这件事</h3>
+        <p class="article-excerpt">塔勒布说，脆弱的反面不是坚强，而是从冲击中成长。重新理解了为什么定投策略比择时更合理。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+    <div class="article-item" data-tag="投资" onclick="showPost(20)">
+      <span class="article-num">20</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-01-05</span>
+        </div>
+        <h3 class="article-title">2025年终总结：投资收益率跑赢了沪深300</h3>
+        <p class="article-excerpt">全年收益率+8.3%，跑赢沪深300约12个点。策略没有秘密——低波红利+纳指+标普500，简单重复。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
+  </div>
+
+  <!-- 分页 -->
+  <div class="pagination" id="pagination">
+    <button class="page-btn" id="prevBtn" onclick="prevPage()">←</button>
+    <div class="page-nums" id="pageNums"></div>
+    <button class="page-btn" id="nextBtn" onclick="nextPage()">→</button>
+  </div>
+
+</section>
+
+<hr class="divider">
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&fit=crop&crop=face" class="about-avatar" alt="">
+    <div class="about-text">
+      <h3>关于我</h3>
+      <p>记录工作里的思考、投资中的实践、生活中的发现。坚信好的工具和方法能让每一天都更从容。</p>
+      <div class="about-stats">
+        <div class="stat"><span class="stat-num">20</span><span class="stat-label">文章</span></div>
+        <div class="stat"><span class="stat-num">3</span><span class="stat-label">只基金</span></div>
+        <div class="stat"><span class="stat-num">∞</span><span class="stat-label">折腾中</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Post Modals (hidden, populated by JS) -->
+<div class="post-overlay" id="postOverlay" onclick="closePost(event)">
+  <button class="close-btn" onclick="closePostDirect()">✕</button>
+  <div class="post-modal">
+    <img src="" class="post-modal-img" id="postImg" alt="">
+    <div class="post-modal-body">
+      <div class="post-modal-meta" id="postMeta"></div>
+      <h1 class="post-modal-title" id="postTitle"></h1>
+      <div class="post-modal-content" id="postContent"></div>
+    </div>
+  </div>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const posts = [
+  {
+    id: 1,
+    title: "用 AI 工具提升行政执法法制审核效率的实践",
+    date: "2026-04-15",
+    tag: "工作",
+    tagClass: "tag-work",
+    img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85&fit=crop",
+    content: `
+      <p>行政执法法制审核是基层法制工作的核心环节，涉及大量法律条文的检索、案例的比对以及文书格式的核对。传统方式效率低、易出错，AI 工具的引入可以显著改善这一状况。</p>
+      <h2>核心痛点</h2>
+      <ul>
+        <li>法条检索依赖人工翻查，耗时长</li>
+        <li>同类案件裁量标准不一致</li>
+        <li>文书格式不规范问题反复出现</li>
+      </ul>
+      <h2>AI 辅助方案</h2>
+      <p>通过建立结构化的法律知识库，配合 AI 问答接口，可以实现：法条的快速定位、裁量基准的智能提示、文书格式的自动检查。这套方案已在实际工作中验证，效果明显。</p>
+      <blockquote>工具只是手段，核心还是人。用好 AI 工具的关键在于，知道什么时候用它，什么时候不该用它。</blockquote>
+      <h2>下一步计划</h2>
+      <p>继续完善知识库内容，积累更多典型案例，形成可直接调用的执法参考模板。</p>
+    `
+  },
+  {
+    id: 2,
+    title: "法制审核文书常见错误清单：100个案例复盘",
+    date: "2026-04-12",
+    tag: "工作",
+    tagClass: "tag-work",
+    img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=85&fit=crop",
+    content: `
+      <p>法制审核是行政处罚程序中最关键的环节之一，文书质量直接关系到案件成败。我整理了最近三年案卷评查中发现的典型错误，共性问题远比想象中多。</p>
+      <h2>主体认定类错误</h2>
+      <p>当事人信息填写不全或错误是最常见的问题。身份证号缺失、统一社会信用代码填写不规范、地址不精确等问题在评查卷中反复出现。</p>
+      <blockquote>主体认定错误是硬伤，一经发现即构成程序违法，比内容错误更难补救。</blockquote>
+      <h2>证据链问题</h2>
+      <ul>
+        <li>取证时间逻辑矛盾（早于当事人陈述发生）</li>
+        <li>书证无原件或复制件未注明"与原件一致"</li>
+        <li>询问笔录缺少关键信息（无地点、无告知事项）</li>
+      </ul>
+      <h2>自由裁量适用</h2>
+      <p>罚款金额无裁量说理，或说理内容与裁量基准不对应，是另一类高频问题。行政处罚决定书必须载明裁量依据，否则在行政复议中被撤销的风险极高。</p>
+    `
+  },
+  {
+    id: 3,
+    title: "Markdown 写作：为什么我彻底放弃了 Word",
+    date: "2026-04-10",
+    tag: "效率",
+    tagClass: "tag-eff",
+    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=85&fit=crop",
+    content: `
+      <p>Word 是我用了十几年的写作工具，直到我开始频繁遇到这些问题：格式错乱、文件损坏、多设备同步困难、协作冲突。</p>
+      <h2>Word 的三个噩梦</h2>
+      <p>第一个噩梦是版本管理。每次改动都要另存文件，docx-v1、v2、v3、v4……最后自己都分不清哪个是最终版。第二个噩梦是格式刷。一篇文章调好格式，换到另一台电脑打开，字体全变了。第三个噩梦是协作。多人同时编辑一个文档，合并时灾难现场。</p>
+      <blockquote>Word 解决的是排版问题，而不是写作本身。当写作和排版绑定在一起，两者都会变得脆弱。</blockquote>
+      <h2>Markdown 带来的改变</h2>
+      <p>切换到 Markdown 后，写作回归本质：内容。格式变成简单的标记符号，<code>#</code> 是标题，<code>**</code> 是加粗，<code>-</code> 是列表。文件就是一个纯文本，走到哪都能打开，永远不会损坏。</p>
+      <h2>现在的写作流</h2>
+      <p>Typora 写 Markdown → 导出 PDF 或 DOCX → 自动同步到 iCloud。这个流程我跑了两年，再没遇到过格式问题。</p>
+    `
+  },
+  {
+    id: 4,
+    title: "从零搭建个人投资追踪系统：工具选型与实践",
+    date: "2026-04-08",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    content: `
+      <p>投资是一件需要长期坚持的事，而数据的记录和追踪往往是最费时间的环节。我花了几天时间，用 AI 辅助搭建了一套自动化投资追踪系统，现在每天只需要打开网页就能看到所有持仓情况。</p>
+      <h2>工具选型</h2>
+      <p>核心数据源选择了 AkShare 和东方财富 API，行情数据免费且覆盖全面。前端用简单的 HTML + Chart.js 展示图表，后端用 Python 脚本定时更新数据。</p>
+      <h2>核心功能</h2>
+      <ul>
+        <li>持仓收益实时计算</li>
+        <li>250日均线偏离度可视化</li>
+        <li>RSI 超买超卖提示</li>
+        <li>每日红绿灯评分卡</li>
+      </ul>
+      <blockquote>投资系统是为自己服务的，不需要追求花哨，核心数据清晰直观就够了。</blockquote>
+      <h2>踩过的坑</h2>
+      <p>前复权数据计算均线时要格外注意，否则历史数据会失真。另外 API 有频率限制，定时任务间隔不要太短。</p>
+    `
+  },
+  {
+    id: 5,
+    title: "重庆的秋天：一条被忽略的 Citywalk 路线",
+    date: "2026-04-05",
+    tag: "生活",
+    tagClass: "tag-life",
+    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop",
+    content: `
+      <p>在重庆住了这么多年，我第一次认真走了一遍鹅岭到李子坝这条线。9公里的路，穿过老社区、防空洞、废弃铁路，城市的褶皱里藏着太多没注意过的细节。</p>
+      <h2>起点：鹅岭公园</h2>
+      <p>早上六点半的鹅岭，空气里带着潮湿的树叶味道。公园里全是晨练的老人，打太极的、抖空竹的、写水字的。我穿过他们，沿着步道往南走，很快就离开了主路。</p>
+      <h2>防空洞</h2>
+      <p>这段路有意思的地方在于，你会不断和防空洞相遇。它们被改造成了火锅馆、麻将馆、小酒馆。走在里面，凉飕飕的，能闻到隔壁飘来的牛油火锅香味。</p>
+      <blockquote>一座城市的深度，往往藏在它不愿拆掉的老建筑里。</blockquote>
+      <h2>李子坝</h2>
+      <p>到了李子坝观景台已经快中午了，人很多。但我从侧面小路绕到江边，那里几乎没人，坐在石头上发了会儿呆，看着轻轨从头顶的楼里钻出来，又钻进去。</p>
+    `
+  },
+  {
+    id: 6,
+    title: "Mac mini + 极空间 NAS：我的个人数字中枢",
+    date: "2026-03-28",
+    tag: "效率",
+    tagClass: "tag-eff",
+    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85&fit=crop",
+    content: `
+      <p>去年入手了 Mac mini M4，配合极空间 NAS Z4，用了大半年，组合超出预期，记录一下真实使用感受。</p>
+      <h2>为什么选 Mac mini</h2>
+      <p>M4 芯片性能强，功耗低，Mac mini 体积小不占地方，性价比在 Mac 产品线里最高。8G 内存日常办公够用，有条件建议上 16G。</p>
+      <h2>极空间 NAS 的价值</h2>
+      <p>Radarr/Sonarr 自动追剧追电影，Jellyfin 做媒体中心，Jellyseerr 做请求管理。这套自动化媒体库体验比任何流媒体都爽。</p>
+      <h2>数据备份策略</h2>
+      <p>重要文件用 Mac 自带 Time Machine 备份到 NAS，另外用 rclone 定期同步到阿里云 OSS，冷备一份。重要工作文件三重保护。</p>
+      <blockquote>NAS 是那个"买了之后才发现早就需要"的东西。</blockquote>
+    `
+  },
+  {
+    id: 7,
+    title: "定投指数基金两年：我在熊市里学到的五件事",
+    date: "2026-03-22",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=1200&q=85&fit=crop",
+    content: `
+      <p>2024年1月，我开始正式定投三只指数基金：红利低波50、纳指100、标普500。每周固定金额，雷打不动，到现在已经坚持了两年。</p>
+      <h2>第一件事：熊市是最好的课堂</h2>
+      <p>2024年的大部分时间，A股都在震荡下行。账户持续亏损时，心里确实不好受。但回过头看，那段时间积累的份额数量，是后面回血的基础。没有熊市播种，就没有牛市收获。</p>
+      <blockquote>定投的核心逻辑很简单：跌的时候买更多份额，涨的时候享受复利。难的是坚持做到。</blockquote>
+      <h2>第二件事：不要每天看账户</h2>
+      <p>盯盘是散户最大的敌人。看了就容易动，动了一般就后悔。我现在固定每周日晚上看一眼，算一下偏离度和RSI，然后该干嘛干嘛。</p>
+      <h2>第三件事：MA250 是最好的朋友</h2>
+      <p>用均线来判断周期位置，比任何宏观预测都简单。大盘在 MA250 以下，慢慢买；在 MA250 以上，减少定投或者停止。纪律比判断重要。</p>
+    `
+  },
+  {
+    id: 8,
+    title: "博客上线全流程：零基础也能做网站",
+    date: "2026-03-20",
+    tag: "技术",
+    tagClass: "tag-tech",
+    img: "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=85&fit=crop",
+    content: `
+      <p>很多人觉得做网站是技术活，其实现在有了 AI 辅助，最难的那部分已经有人帮你做了。这篇文章记录了我从零开始建博客的完整流程。</p>
+      <h2>需要准备的东西</h2>
+      <ul>
+        <li>一个 GitHub 账号（免费）</li>
+        <li>GitHub Desktop（免费，图形界面）</li>
+        <li>一个 Vercel 账号（免费）</li>
+        <li>一个域名（可选，约50元/年）</li>
+      </ul>
+      <h2>核心步骤</h2>
+      <p>第一步用 AI 生成网站代码，第二步用 GitHub Desktop 推送到仓库，第三步 Vercel 读取 GitHub 仓库自动构建部署。全程不需要写代码，不需要敲命令行。</p>
+      <blockquote>不要等准备好了再开始，先跑通最小闭环，再迭代优化。</blockquote>
+      <h2>总费用</h2>
+      <p>如果用 Vercel 免费额度托管，网站本身不花钱。只需要一个域名（可选），50元/年。如果用腾讯云香港服务器，月均30元左右。</p>
+    `
+  },
+  {
+    id: 9,
+    title: "读书笔记：《卡片笔记写作法》",
+    date: "2026-03-15",
+    tag: "读书",
+    tagClass: "tag-book",
+    img: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85&fit=crop",
+    content: `
+      <p>尼克拉斯·卢曼是德国社会学家，他一生写了70本书和400多篇论文，产量惊人。他的秘密是一个装满卡片的盒子——不是文件夹，是一个笔记系统。</p>
+      <h2>核心思想</h2>
+      <p>传统的笔记系统是按主题分类：读书笔记放这里，工作笔记放那里。卢曼的方法不一样：所有笔记都放在一个盒子里，用编号和引用来建立联系。一张卡片引用另一张，卡片之间形成网络，知识自己生长。</p>
+      <blockquote>写作不是把脑子里的东西倒出来，而是通过写作来思考。卡片盒是思考的外骨骼。</blockquote>
+      <h2>实操方法</h2>
+      <p>卢曼笔记法有三个核心动作：<strong>闪念笔记</strong>（随手记下的想法，不加判断）、<strong>文献笔记</strong>（读完书后，用自己的话缩写，附上来源）、<strong>永久笔记</strong>（将闪念和文献整合，形成独立的思考片段，放入卡片盒）。</p>
+      <h2>我的实践</h2>
+      <p>我用 Obsidian 搭了这套系统。目前卡片盒里有200多条笔记，明显感觉到写文章比以前容易了——不是因为我变聪明了，是因为素材一直在积累。</p>
+    `
+  },
+  {
+    id: 10,
+    title: "红利低波50：熊市里的压舱石",
+    date: "2026-03-10",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    content: `
+      <p>红利低波50是我定投组合里最稳的一只。2024年大盘跌了将近20%，它只跌了8%，股息率还有5.6%。今年分红到账的时候，账户里的数字比我预想的好看。</p>
+      <h2>为什么选它</h2>
+      <p>选它的逻辑很简单：银行股占比高，估值低，每年分红稳定。经济下行期，稳健比成长更重要。而且低波动的特性让它在震荡市里没那么容易让人心态崩溃。</p>
+      <blockquote>红利策略的本质是"收租"逻辑——买股票当房东，等着企业每年给你发钱。</blockquote>
+      <h2>两年的真实持有感受</h2>
+      <p>2024年初开始买，中间跌了两次超过5%，我都加了仓。到年底算了一下，持有收益率+6.2%，跑赢沪深300大概15个点。最重要的是，持有体验很平静，不需要每天盯着看。</p>
+    `
+  },
+  {
+    id: 11,
+    title: "Obsidian 入门：我的第二大脑搭建记录",
+    date: "2026-03-05",
+    tag: "效率",
+    tagClass: "tag-eff",
+    img: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85&fit=crop",
+    content: `
+      <p>Obsidian 是我今年花时间最多折腾的软件。用了三个月，攒了200多条笔记，慢慢开始感受到它说的"第二大脑"是什么意思。</p>
+      <h2>为什么从 Notion 迁出来</h2>
+      <p>Notion 很好用，但有两个问题让我不舒服：一是数据在别人服务器上，二是打开速度在国内不太稳定。Obsidian 是本地存储，文件格式是 Markdown，某种程度上说这是真正属于自己的笔记。</p>
+      <h2>核心用法：双链</h2>
+      <p>Obsidian 最有意思的功能是双向链接。写一条笔记时可以链接到另一条，另一条笔记里会自动出现"反向链接"。久而久之，相关的内容自动聚拢，形成一张网。</p>
+      <blockquote>普通笔记是堆箱子，双链笔记是织网。箱子会忘，网不会散。</blockquote>
+      <h2>我的工作流</h2>
+      <p>每天早上在地铁上把当天想到的东西随手记一条"闪念笔记"，晚上回家整理成永久笔记。读书时直接用 Obsidian 做笔记，而不是在书旁边贴便签。</p>
+    `
+  },
+  {
+    id: 12,
+    title: "深夜在洪崖洞对面看重庆：有一种安静叫嘉陵江",
+    date: "2026-02-28",
+    tag: "生活",
+    tagClass: "tag-life",
+    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop",
+    content: `
+      <p>大剧院旁边下去的那片江边，是我这两年的秘密基地。洪崖洞亮着灯，对岸的千厮门大桥倒影在江面，来往的人不多，可以坐在石头上发很久的呆。</p>
+      <h2>为什么喜欢这里</h2>
+      <p>重庆有意思的地方很多，但大多人太多。太古里、洪崖洞、磁器口，去一次就不想再去第二次。这个江边不一样，来的都是本地人，遛狗的、钓鱼的、谈恋爱的、带着啤酒坐着发呆的。</p>
+      <h2>最佳时间</h2>
+      <p>夏天晚上8点到9点最好。天刚黑透，灯刚亮起来，温度也降下来了。冬天不建议，江边风大。</p>
+      <blockquote>城市里总需要一个地方，可以什么都不想，就坐着看水。</blockquote>
+    `
+  },
+  {
+    id: 13,
+    title: "用极空间 NAS 打造全自动化媒体库",
+    date: "2026-02-20",
+    tag: "技术",
+    tagClass: "tag-tech",
+    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=85&fit=crop",
+    content: `
+      <p>极空间 NAS 买回来之后，装了 Radarr、Sonarr、Jellyfin 三件套，用了三个月，彻底告别找资源、下载、整理这个循环。</p>
+      <h2>Radarr：电影自动追</h2>
+      <p>在 Radarr 里搜一部想看的电影，它会自动去各个 PT 站抓种子、下载、自动改名整理到对应文件夹。4K、1080P、不同版本全自动处理。</p>
+      <h2>Sonarr：剧集自动追</h2>
+      <p>Sonarr 追踪订阅的剧集，新一集出来后自动下载、自动刮削封面和简介。不用再打开任何一个网站。</p>
+      <h2>Jellyfin：全设备播放</h2>
+      <p>下载好的电影剧集通过 Jellyfin 在任何设备播放，电视、手机、平板都可以。界面比流媒体还干净，没有广告，没有推荐干扰。</p>
+      <blockquote>这套系统建好之后，看片这件事变成了纯粹的消费，不需要任何操作成本。</blockquote>
+    `
+  },
+  {
+    id: 14,
+    title: "执法记录仪数据的规范化管理实践",
+    date: "2026-02-15",
+    tag: "工作",
+    tagClass: "tag-work",
+    img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&q=85&fit=crop",
+    content: `
+      <p>执法记录仪的视频资料是行政处罚案件的重要证据链环节。2023年我们遇到了两起行政复议，焦点都在视音频资料的完整性和调取程序的合规性上。</p>
+      <h2>常见问题</h2>
+      <ul>
+        <li>视音频存储分散，案件调取时找不到对应文件</li>
+        <li>文件名不规范，无法快速定位到具体时间地点</li>
+        <li>导出刻录未注明原始载体信息</li>
+        <li>删除前未按规定进行证据封存</li>
+      </ul>
+      <h2>规范化方案</h2>
+      <p>建立统一的命名规则：日期+时间+地点+设备编号。每月固定日期汇总刻录，一案一档，光盘标注清晰，归档到档案室。同时保留原始存储介质备查。</p>
+      <blockquote>执法记录仪的数据管理，看起来是技术问题，实际上是证据意识问题。</blockquote>
+    `
+  },
+  {
+    id: 15,
+    title: "用 Python + AkShare 给自己做一个估值仪表盘",
+    date: "2026-02-08",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    content: `
+      <p>买股票之前先看估值，这是最基本的原则。但估值不是单看一个 PE 就能判断的，需要多个指标综合来看。我用 Python + AkShare 做了一套自己的估值仪表盘。</p>
+      <h2>四个核心指标</h2>
+      <ul>
+        <li><strong>PE（市盈率）</strong>：当前估值历史分位</li>
+        <li><strong>PB（市净率）</strong>：净资产视角的估值</li>
+        <li><strong>股债利差</strong>：沪深300 PE 倒数 - 10年期国债收益率</li>
+        <li><strong>MA250偏离度</strong>：当前价格相对均线的偏离程度</li>
+      </ul>
+      <h2>怎么用</h2>
+      <p>四个指标里三个以上显示低估，就是适合加仓的区间。全部高估，就减少定投或者停止。这个策略帮我躲过了2024年最恐慌的那段下跌——不是预测，而是估值告诉我的。</p>
+      <blockquote>投资不需要预测未来，只需要知道现在贵不贵。</blockquote>
+    `
+  },
+  {
+    id: 16,
+    title: "晨间routine：通勤时间的最大化利用",
+    date: "2026-02-01",
+    tag: "效率",
+    tagClass: "tag-eff",
+    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=85&fit=crop",
+    content: `
+      <p>单程40分钟地铁，来回80分钟。一年250个工作日，就是330多个小时——相当于整整14整天。这个时间如果只是刷手机，亏大了。</p>
+      <h2>我的通勤分工</h2>
+      <ul>
+        <li><strong>去程（40分钟）</strong>：听播客或看书，纯输入</li>
+        <li><strong>回程（40分钟）</strong>：用 Obsidian 整理今天学到的东西，写闪念笔记</li>
+      </ul>
+      <h2>播客推荐（法律+工作相关）</h2>
+      <p>《不合规》《随机波动》《八分》《知本论》——这几个是我反复听的，法律和社会议题交叉，能听到很多平时接触不到的角度。</p>
+      <blockquote>时间不是省出来的，是换来的。把低价值的"杀死时间"换成高价值的"输入积累"，通勤就不是浪费了。</blockquote>
+    `
+  },
+  {
+    id: 17,
+    title: "一个人吃饭的乐趣：重庆小面地图 2.0",
+    date: "2026-01-25",
+    tag: "生活",
+    tagClass: "tag-life",
+    img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=85&fit=crop",
+    content: `
+      <p>一个人吃饭这件事，我是认真的。约人太麻烦，下馆子一个人点菜不划算，小面刚好——一碗，十几块钱，五分钟吃完，不需要任何人配合。</p>
+      <h2>重庆小面分类</h2>
+      <ul>
+        <li>清汤系：南坪"眼镜面"，汤底干净</li>
+        <li>红油系：解放碑"花市豌杂"，辣度可控</li>
+        <li>糊辣系：沙坪坝"陈耳朵"，糊辣壳香</li>
+      </ul>
+      <h2>一个经验</h2>
+      <p>小面这东西，不要去网红店，不要看点评网站排名。就找那种开着很多年、门口停满外卖小哥的店，味道一定不会差。</p>
+      <blockquote>城市里最真实的味道，往往在那些不起眼的小店里。</blockquote>
+    `
+  },
+  {
+    id: 18,
+    title: "AI 帮我写材料这一年：真实体验与避坑",
+    date: "2026-01-18",
+    tag: "技术",
+    tagClass: "tag-tech",
+    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=85&fit=crop",
+    content: `
+      <p>2024年1月开始，我正式把 AI 引入日常材料写作。整整一年，写了大概300多份材料，从通知到方案到总结报告都试过，有资格说点实在话了。</p>
+      <h2>真的有用的场景</h2>
+      <ul>
+        <li>列提纲：给 AI 一个主题，它能在5秒内给你10个角度</li>
+        <li>改格式：把口语化的内容整理成规范格式</li>
+        <li>翻译法条：用自然语言描述需求，AI 帮你找对应法条表述</li>
+        <li>润色文字：写完初稿让 AI 改一遍用词，更正式更简洁</li>
+      </ul>
+      <h2>踩过的坑</h2>
+      <p><strong>数据别让 AI 编。</strong> 2024年有一次让 AI 帮我填数据，编了一套增长率，被领导一眼看穿。事实性内容必须自己核实。</p>
+      <blockquote>AI 是写作的加速器，不是思考的替代品。核心判断永远要自己做。</blockquote>
+    `
+  },
+  {
+    id: 19,
+    title: "读《反脆弱》：从不确定性里获益这件事",
+    date: "2026-01-10",
+    tag: "读书",
+    tagClass: "tag-book",
+    img: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=85&fit=crop",
+    content: `
+      <p>塔勒布这本《反脆弱》读了两遍，第一遍读不懂，第二遍拍大腿。反脆弱这个概念，帮我重新理解了为什么定投策略比择时更有道理。</p>
+      <h2>什么是反脆弱</h2>
+      <p>脆弱的东西在冲击下会碎，坚强的东西不变，但反脆弱的东西——你敲它一下，它反而变强了。人体是反脆弱的：适度压力让肌肉生长，过度安逸让机能退化。</p>
+      <h2>和投资的关系</h2>
+      <p>定投策略就是投资里的反脆弱。熊市亏损是冲击，但坚持下来的人积累了大量便宜筹码，等牛市来的时候回血更快、收益更高。反而是那些择时失败、高买低卖的人，是脆弱的。</p>
+      <blockquote>脆弱的系统追求稳定，反脆弱的系统利用波动。</blockquote>
+    `
+  },
+  {
+    id: 20,
+    title: "2025年终总结：投资收益率跑赢了沪深300",
+    date: "2026-01-05",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=1200&q=85&fit=crop",
+    content: `
+      <p>2025年全年收益率+8.3%，跑赢沪深300约12个点。对职业投资者来说这个数字可能一般，但对我这个业余定投选手来说，很满意了。</p>
+      <h2>三只基金的贡献</h2>
+      <ul>
+        <li><strong>红利低波50</strong>：+6.2%，股息再投贡献了不少</li>
+        <li><strong>纳指100</strong>：+18.5%，美股科技股全年强势</li>
+        <li><strong>标普500</strong>：+4.1%，稳健但不够亮眼</li>
+      </ul>
+      <h2>2026年的计划</h2>
+      <p>维持现有配置，涨了不卖，跌了适当加码。MA250 均线偏离度是我判断加码节奏的核心指标，不预设目标收益率，让市场决定。</p>
+      <blockquote>投资这件事，少折腾比多折腾重要得多。</blockquote>
+    `
+  }
+];
+
+function showPost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+  document.getElementById('postImg').src = post.img;
+  document.getElementById('postMeta').innerHTML =
+    `<span class="tag ${post.tagClass}">${post.tag}</span><span class="card-date">${post.date}</span>`;
+  document.getElementById('postTitle').textContent = post.title;
+  document.getElementById('postContent').innerHTML = post.content;
+  document.getElementById('postOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePost(e) {
+  if (e.target === document.getElementById('postOverlay')) closePostDirect();
+}
+function closePostDirect() {
+  document.getElementById('postOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePostDirect(); });
+
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 600);
+});
+
+// ── 分页 + 筛选 ──
+const PAGE_SIZE = 10;
+let currentFilter = 'all';
+let currentPage = 1;
+
+function getVisibleItems() {
+  return Array.from(document.querySelectorAll('.article-item'));
+}
+
+function getFilteredItems() {
+  const items = getVisibleItems();
+  if (currentFilter === 'all') return items;
+  return items.filter(item => item.dataset.tag === currentFilter);
+}
+
+function getTotalPages(items) {
+  return Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+}
+
+function renderPage() {
+  const items = getFilteredItems();
+  const totalPages = getTotalPages(items);
+
+  // Clamp current page
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+
+  // Show/hide items
+  getVisibleItems().forEach(item => item.dataset.hidden = 'true');
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = items.slice(start, start + PAGE_SIZE);
+  pageItems.forEach(item => item.dataset.hidden = 'false');
+
+  // Build page numbers
+  const pageNums = document.getElementById('pageNums');
+  pageNums.innerHTML = '';
+
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) addPageNum(i, pageNums);
+  } else {
+    addPageNum(1, pageNums);
+    if (currentPage > 3) pageNums.innerHTML += '<span class="page-ellipsis">…</span>';
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+      addPageNum(i, pageNums);
+    }
+    if (currentPage < totalPages - 2) pageNums.innerHTML += '<span class="page-ellipsis">…</span>';
+    addPageNum(totalPages, pageNums);
+  }
+
+  document.getElementById('prevBtn').disabled = currentPage <= 1;
+  document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+}
+
+function addPageNum(i, container) {
+  const btn = document.createElement('button');
+  btn.className = 'page-num' + (i === currentPage ? ' active' : '');
+  btn.textContent = i;
+  btn.onclick = () => { currentPage = i; renderPage(); };
+  container.appendChild(btn);
+}
+
+function setFilter(tag) {
+  currentFilter = tag;
+  currentPage = 1;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === tag));
+  renderPage();
+}
+
+function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+function nextPage() {
+  const items = getFilteredItems();
+  if (currentPage < getTotalPages(items)) { currentPage++; renderPage(); }
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', renderPage);
+</script>
+
+</body>
+</html>
