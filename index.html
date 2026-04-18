@@ -180,56 +180,52 @@
       margin-bottom: 60px;
     }
 
-    /* ── Cards Grid ── */
-    .cards-grid {
+    /* ── Article List ── */
+    .article-list { display: flex; flex-direction: column; }
+
+    .article-item {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
+      grid-template-columns: 72px 1fr 140px;
+      gap: 0 32px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-      text-decoration: none;
-      color: inherit;
-      display: block;
+      transition: background 0.2s;
     }
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      border-color: var(--accent);
+    .article-item:first-child { border-top: 1px solid var(--border); }
+
+    .article-item:hover { background: rgba(88,166,255,0.03); }
+
+    .article-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.3s;
     }
 
-    .card-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
+    .article-item:hover .article-num { color: var(--accent); opacity: 0.5; }
 
-    .card-body { padding: 24px; }
+    .article-info { min-width: 0; }
 
-    .card-meta {
+    .article-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 8px;
     }
 
     .tag {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      padding: 3px 10px;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
       border-radius: 99px;
       color: #fff;
     }
-
     .tag-work { background: var(--tag-work); }
     .tag-invest { background: var(--tag-invest); }
     .tag-life { background: var(--tag-life); }
@@ -237,23 +233,47 @@
     .tag-book { background: var(--tag-book); }
     .tag-eff { background: var(--tag-eff); }
 
-    .card-date { font-size: 0.8rem; color: var(--text2); }
+    .article-date { font-size: 0.75rem; color: var(--text2); }
 
-    .card-title {
-      font-size: 1.1rem;
+    .article-title {
+      font-size: 1.05rem;
       font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 10px;
       color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.4;
       transition: color 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .card:hover .card-title { color: var(--accent); }
+    .article-item:hover .article-title { color: var(--accent); }
 
-    .card-excerpt {
-      font-size: 0.88rem;
+    .article-excerpt {
+      font-size: 0.82rem;
       color: var(--text2);
-      line-height: 1.6;
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .article-thumb {
+      width: 140px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .article-item:hover .article-thumb { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .article-item { grid-template-columns: 48px 1fr; gap: 0 16px; }
+      .article-thumb { display: none; }
+      .article-num { font-size: 2rem; }
     }
 
     /* ── About ── */
@@ -461,124 +481,124 @@
   <h2 class="section-title">全部文章</h2>
   <p class="section-desc">记录工作中的思考、投资里的实践、生活中的发现。</p>
 
-  <div class="cards-grid">
+  <div class="article-list">
 
-    <!-- 文章1 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(1)">
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(1)">
+      <span class="article-num">01</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-work">工作</span>
-          <span class="card-date">2026-04-15</span>
+          <span class="article-date">2026-04-15</span>
         </div>
-        <h3 class="card-title">用 AI 工具提升行政执法法制审核效率的实践</h3>
-        <p class="card-excerpt">结合法律知识库与 AI 辅助审查工具，探索法制审核工作的数字化转型路径，从重复性工作中解放出来。</p>
+        <h3 class="article-title">用 AI 工具提升行政执法法制审核效率的实践</h3>
+        <p class="article-excerpt">结合法律知识库与 AI 辅助审查工具，探索法制审核工作的数字化转型路径。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章2 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(2)">
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(2)">
+      <span class="article-num">02</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-work">工作</span>
-          <span class="card-date">2026-04-12</span>
+          <span class="article-date">2026-04-12</span>
         </div>
-        <h3 class="card-title">法制审核文书常见错误清单：100个案例复盘</h3>
-        <p class="card-excerpt">整理近三年案卷评查中发现的典型问题，按类别归纳总结，附正确写法参考，持续更新。</p>
+        <h3 class="article-title">法制审核文书常见错误清单：100个案例复盘</h3>
+        <p class="article-excerpt">整理近三年案卷评查中发现的典型问题，按类别归纳总结，附正确写法参考。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章3 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(3)">
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(3)">
+      <span class="article-num">03</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-eff">效率</span>
-          <span class="card-date">2026-04-10</span>
+          <span class="article-date">2026-04-10</span>
         </div>
-        <h3 class="card-title">Markdown 写作：为什么我彻底放弃了 Word</h3>
-        <p class="card-excerpt">从 Word 的崩溃与格式灾难，到 Markdown 的简洁与安心。这是一次写作工具的认知升级。</p>
+        <h3 class="article-title">Markdown 写作：为什么我彻底放弃了 Word</h3>
+        <p class="article-excerpt">从 Word 的崩溃与格式灾难，到 Markdown 的简洁与安心。这是一次写作工具的认知升级。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章4 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(4)">
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(4)">
+      <span class="article-num">04</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-invest">投资</span>
-          <span class="card-date">2026-04-08</span>
+          <span class="article-date">2026-04-08</span>
         </div>
-        <h3 class="card-title">从零搭建个人投资追踪系统：工具选型与实践</h3>
-        <p class="card-excerpt">用 Python + Web 工具搭建个人投资组合追踪系统，自动化获取行情数据，告别手动记录。</p>
+        <h3 class="article-title">从零搭建个人投资追踪系统：工具选型与实践</h3>
+        <p class="article-excerpt">用 Python + Web 工具搭建个人投资组合追踪系统，自动化获取行情数据。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章5 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(5)">
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(5)">
+      <span class="article-num">05</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-life">生活</span>
-          <span class="card-date">2026-04-05</span>
+          <span class="article-date">2026-04-05</span>
         </div>
-        <h3 class="card-title">重庆的秋天：一条被忽略的 Citywalk 路线</h3>
-        <p class="card-excerpt">从鹅岭公园到李子坝，穿过老社区和防空洞隧道，用半天时间重新认识这座山城的秋天。</p>
+        <h3 class="article-title">重庆的秋天：一条被忽略的 Citywalk 路线</h3>
+        <p class="article-excerpt">从鹅岭公园到李子坝，穿过老社区和防空洞隧道，用半天时间重新认识这座山城。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章6 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(6)">
-      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(6)">
+      <span class="article-num">06</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-eff">效率</span>
-          <span class="card-date">2026-03-28</span>
+          <span class="article-date">2026-03-28</span>
         </div>
-        <h3 class="card-title">Mac mini + 极空间 NAS：我的个人数字中枢</h3>
-        <p class="card-excerpt">Mac mini M4 作为主力工作机，极空间 NAS 负责存储与媒体管理，这套组合用了半年，聊聊真实感受。</p>
+        <h3 class="article-title">Mac mini + 极空间 NAS：我的个人数字中枢</h3>
+        <p class="article-excerpt">Mac mini M4 配合极空间 NAS Z4，这套组合用了半年，聊聊真实使用感受。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章7 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(7)">
-      <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(7)">
+      <span class="article-num">07</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-invest">投资</span>
-          <span class="card-date">2026-03-22</span>
+          <span class="article-date">2026-03-22</span>
         </div>
-        <h3 class="card-title">定投指数基金两年：我在熊市里学到的五件事</h3>
-        <p class="card-excerpt">2024年初开始定投，中间经历了大幅下跌，也经历了回血。这段经历比任何理财书都更直接地教会我投资是什么。</p>
+        <h3 class="article-title">定投指数基金两年：我在熊市里学到的五件事</h3>
+        <p class="article-excerpt">2024年初开始定投，中间经历了大幅下跌，也经历了回血。这段经历比任何理财书都更直接。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章8 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(8)">
-      <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(8)">
+      <span class="article-num">08</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-tech">技术</span>
-          <span class="card-date">2026-03-20</span>
+          <span class="article-date">2026-03-20</span>
         </div>
-        <h3 class="card-title">博客上线全流程：零基础也能做网站</h3>
-        <p class="card-excerpt">注册 GitHub、安装 GitHub Desktop、推到远程仓库、Vercel 部署上线——完整流程记录，从零到上线只需要半天。</p>
+        <h3 class="article-title">博客上线全流程：零基础也能做网站</h3>
+        <p class="article-excerpt">注册 GitHub、推到远程仓库、Vercel 部署上线——完整流程记录，从零到上线只需要半天。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
-    <!-- 文章9 -->
-    <a class="card" href="javascript:void(0)" onclick="showPost(9)">
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80&fit=crop" class="card-img" alt="">
-      <div class="card-body">
-        <div class="card-meta">
+    <div class="article-item" onclick="showPost(9)">
+      <span class="article-num">09</span>
+      <div class="article-info">
+        <div class="article-meta">
           <span class="tag tag-book">读书</span>
-          <span class="card-date">2026-03-15</span>
+          <span class="article-date">2026-03-15</span>
         </div>
-        <h3 class="card-title">读书笔记：《卡片笔记写作法》</h3>
-        <p class="card-excerpt">卢曼用卡片盒写了70本书，方法却出奇简单。笔记不是记录，而是思考的工具。</p>
+        <h3 class="article-title">读书笔记：《卡片笔记写作法》</h3>
+        <p class="article-excerpt">卢曼用卡片盒写了70本书，方法却出奇简单。笔记不是记录，而是思考的工具。</p>
       </div>
-    </a>
+      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
   </div>
 </section>
@@ -591,7 +611,7 @@
     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&fit=crop&crop=face" class="about-avatar" alt="">
     <div class="about-text">
       <h3>关于我</h3>
-      <p>重庆公务员，从事交通运输综合行政执法法制审核工作。业余研究投资理财（指数基金为主），折腾效率工具，记录生活发现。坚信好的工具和方法能让工作和生活都更从容。</p>
+      <p>记录工作里的思考、投资中的实践、生活中的发现。坚信好的工具和方法能让每一天都更从容。</p>
       <div class="about-stats">
         <div class="stat"><span class="stat-num">9</span><span class="stat-label">文章</span></div>
         <div class="stat"><span class="stat-num">3</span><span class="stat-label">基金持仓</span></div>
