@@ -412,16 +412,18 @@
     .about-grid {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 60px;
-      align-items: center;
+      gap: 40px;
+      align-items: start;
     }
 
     .about-avatar {
       width: 120px;
       height: 120px;
-      border-radius: 50%;
+      border-radius: 24px;
       object-fit: cover;
-      border: 3px solid var(--border);
+      border: 2px solid var(--border);
+      display: block;
+      flex-shrink: 0;
     }
 
     .about-text h3 {
@@ -626,6 +628,19 @@
 
   <div class="article-list">
 
+    <div class="article-item" data-tag="投资" onclick="showPost(23)">
+      <span class="article-num"></span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-04-18</span>
+        </div>
+        <h3 class="article-title">每日大佬说 · 黄仁勋：AI的未来，2026年最新预测</h3>
+        <p class="article-excerpt">Token工厂经济、万亿需求、Agent革命、物理AI——GTC 2026黄仁勋完整观点整理</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
     <div class="article-item" data-tag="投资" onclick="showPost(22)">
       <span class="article-num"></span>
       <div class="article-info">
@@ -636,7 +651,7 @@
         <h3 class="article-title">每日大佬说 · 2026-04-18</h3>
         <p class="article-excerpt">阿贝尔首封股东信（3700亿现金储备）/ 黄仁勋反对芯片管制（60%全球芯片产能在中国）/ 段永平泡泡玛特卖put策略</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
     <div class="article-item" data-tag="投资" onclick="showPost(21)">
@@ -649,7 +664,7 @@
         <h3 class="article-title">每日投资信号 · 2026年4月17日</h3>
         <p class="article-excerpt">纳指100、标普500、红利低波50 三基金今日信号卡，含均线偏离度与 RSI 指标。</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
     <div class="article-item" data-tag="工作" onclick="showPost(1)">
@@ -701,7 +716,7 @@
         <h3 class="article-title">从零搭建个人投资追踪系统：工具选型与实践</h3>
         <p class="article-excerpt">用 Python + Web 工具搭建个人投资组合追踪系统，自动化获取行情数据。</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
     <div class="article-item" data-tag="生活" onclick="showPost(5)">
@@ -779,7 +794,7 @@
         <h3 class="article-title">红利低波50：熊市里的压舱石</h3>
         <p class="article-excerpt">银行股高股息+低波动策略，跑赢大盘的同时还能有稳稳的现金流。持有两年的真实感受。</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+      <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
     <div class="article-item" data-tag="效率" onclick="showPost(11)">
@@ -844,7 +859,7 @@
         <h3 class="article-title">用 Python + AkShare 给自己做一个估值仪表盘</h3>
         <p class="article-excerpt">PE、PB、股债利差、均线偏离度——四个指标做成一张图，熊市不慌，牛市不浪。</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+      <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
     <div class="article-item" data-tag="效率" onclick="showPost(16)">
@@ -959,12 +974,214 @@
 <script>
 const posts = [
   {
+    id: 23,
+    title: "每日大佬说 · 黄仁勋：AI的未来，2026年最新预测",
+    date: "2026-04-18",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=85&fit=crop",
+    content: `
+      <p>「大佬说」专注投资与商业人物深度观点记录。本文整合黄仁勋在 GTC 2025（华盛顿）、GTC 2026（圣何塞）两场大会及近期重要访谈的核心内容，梳理他关于 AI 未来发展的完整判断框架。</p>
+      <p>选录标准：有具体数据支撑、有超越一时一事的判断价值、言之有物。</p>
+
+      <h2>一、万亿需求：从芯片公司到"AI工厂"构建者</h2>
+      <p>2026年3月16日，黄仁勋在 GTC 2026 大会开场即抛出震撼数字：</p>
+      <blockquote>
+        <p>"去年这个时候，我们预期未来几年有 5000 亿美元的采购需求。现在，我可以明确地说：2027年，我们能看到至少 <strong>1万亿美元</strong> 的高确信度需求。而且——我们甚至会供不应求。"</p>
+        <p>— 黄仁勋，GTC 2026，2026.3.16</p>
+      </blockquote>
+      <p>这是一个极其重要的定性变化：黄仁勋将 NVIDIA 的定位从"芯片公司"切换为"AI 基础设施与工厂公司"。这个转变的实质是：NVIDIA 不再只是一个硬件供应商，而是开始用工业时代的逻辑（规模化、标准化、流水线）来构建 AI 时代的基础架构。</p>
+
+      <h3>为什么是"工厂"而不是"云"？</h3>
+      <p>黄仁勋提出的核心概念是"Token 工厂"（Token Factory）。在他看来，数据中心的本质已经发生了变化：</p>
+      <ul>
+        <li><strong>过去</strong>：数据仓库，存储文件，供人检索</li>
+        <li><strong>现在</strong>：Token 生产工厂，将电力转化为 AI 推理结果</li>
+      </ul>
+      <p>Token 是 LLM 处理信息的最小单位——一个词、一个图像块、一次计算结果。黄仁勋的核心论点是：<strong>推理才是 AI 的未来</strong>，而推理的核心就是 Token 生成的速度与成本。</p>
+
+      <h3>Token 定价经济学</h3>
+      <p>他在 GTC 2026 上描绘了 Token 的分层定价模型：</p>
+      <ul>
+        <li><strong>免费层</strong>：高吞吐、低速度（大众应用）</li>
+        <li><strong>中级层</strong>：约 3–6 美元/百万 Token（标准商业应用）</li>
+        <li><strong>高级层</strong>：约 45 美元/百万 Token（需要准确性的场景）</li>
+        <li><strong>超高速层</strong>：约 150 美元/百万 Token（科研、金融等高价值推理）</li>
+      </ul>
+      <p>这不是学术预测，而是黄仁勋认为正在发生的价格分层。他说："<strong>推理是你的工作负载，Token 是你的新商品，计算是你的收入。</strong>"</p>
+
+      <hr>
+
+      <h2>二、推理拐点：AI 的第三阶段</h2>
+      <p>黄仁勋将 AI 的发展划分为三个阶段：</p>
+      <blockquote>
+        <p>"第一个阶段是感知 AI——AI 能看、能听。第二个阶段是生成式 AI——AI 能画图、能写作。但真正的第三个阶段是<strong>推理 AI</strong>：AI 能读、能推理、能行动。每一个推理请求都消耗比感知多 100 倍的计算资源。"</p>
+        <p>— 黄仁勋，GTC 2026</p>
+      </blockquote>
+
+      <h3>数字最能说明问题</h3>
+      <ul>
+        <li>过去两年，AI 计算需求增加了约 <strong>10,000 倍</strong></li>
+        <li>Blackwell 架构相比 Hopper：每瓦 Token 产出提升 <strong>35 倍</strong></li>
+        <li>Vera Rubin 相比 Blackwell：Token 生成速率从 2200 万提升到 <strong>7 亿</strong>（增长 350 倍）</li>
+        <li>摩尔定律同期仅能带来约 1.5 倍提升——NVIDIA 在加速计算上的进展远超半导体行业的自然演进</li>
+      </ul>
+
+      <h3>推理为什么需要更多算力？</h3>
+      <p>训练 AI 是一次性的：大模型用大量数据训练一次。推理则是每次用户请求都要执行——大模型每次"思考"都在消耗 Token。而 AI 应用的大规模铺开，意味着推理请求量将以指数级增长，这直接驱动了对芯片产能的爆炸性需求。</p>
+
+      <hr>
+
+      <h2>三、CUDA 护城河：终极飞轮效应</h2>
+      <p>外界常问的一个问题是：AMD 的 GPU 更便宜，为什么大家还是买 NVIDIA？黄仁勋的回答揭示了 NVIDIA 护城河的本质。</p>
+
+      <blockquote>
+        <p>"CUDA 覆盖的不只是 AI。分子动力学、流体力学、基因测序、医学影像——这些应用都在 CUDA 上运行。积累了几十年的开发者生态、算法优化、工具链，这是无法被替代的优势。"</p>
+        <p>— 黄仁勋，Dwarkesh Patel 播客，2026.4.16</p>
+      </blockquote>
+
+      <h3>飞轮效应的具体表现</h3>
+      <p>六年前发布的 Ampere 架构 GPU，如今在云端的价格仍在上涨——因为 CUDA 上运行的应用太多，赋予了这些"老"芯片超长的使用寿命和持续降低的计算成本。这是硬件公司历史上几乎从未出现过的现象。</p>
+      <ul>
+        <li><strong>开发者越多</strong> → 更多算法针对 NVIDIA 优化 → 性能更好</li>
+        <li><strong>性能越好</strong> → 更多用户选择 NVIDIA → 收入更多</li>
+        <li><strong>收入更多</strong> → 更多研发投入 → 下一代芯片更强</li>
+      </ul>
+
+      <h3>架构选错，白送都没用</h3>
+      <p>黄仁勋在 GTC 2026 上说了另一个极具冲击力的话：</p>
+      <blockquote>
+        <p>"如果架构选错了，就算它是免费的，也依然不够划算。数据中心的电力和物理空间是原子层面的硬约束——在固定的千兆瓦电力下，架构决定了你能生产多少 Token，直接决定你的收入。"</p>
+      </blockquote>
+      <p>这句话解释了为什么即使 AMD MI300 价格更低，大型云厂商仍在疯狂采购 Blackwell 和 Rubin。</p>
+
+      <hr>
+
+      <h2>四、Agent 革命：OpenClaw 与企业 IT 重构</h2>
+      <p>如果说 GPU 是 AI 时代的"铁"（基础设施），那么 Agent 就是 AI 时代的"蒸汽机"（应用层）。黄仁勋对 Agent 的重视程度，在 GTC 2026 上达到了前所未有的高度。</p>
+
+      <blockquote>
+        <p>"OpenClaw 是人类历史上最受欢迎的开源项目——它用几周时间就超越了 Linux 三十年的成就。本质上，OpenClaw 就是<strong>智能体计算机的操作系统</strong>，就像 Windows 让我们能创建个人计算机一样。"</p>
+        <p>— 黄仁勋，GTC 2026</p>
+      </blockquote>
+
+      <h3>每个 SaaS 公司都要变成 AaaS 公司</h3>
+      <p>黄仁勋的核心断言：未来每一家 SaaS 公司都必须有"OpenClaw 策略"。这不是选择，而是生存问题。原因很简单——如果你的竞争对手用 Agent 提升了 10 倍效率，而你还在靠人工操作，你将毫无胜算。</p>
+
+      <h3>年薪 + Token 预算：硅谷新招聘范式</h3>
+      <p>黄仁勋描绘了一个正在发生的新趋势：</p>
+      <blockquote>
+        <p>"未来，我们公司的每一位工程师都需要一个年度 Token 预算。他们的基础年薪可能是几十万美元，我会在此基础上再拿出大约一半的金额作为 Token 额度给他们，让他们实现 10 倍的效率提升。"</p>
+      </blockquote>
+      <p>他补充说："入职附带多少 Token 配额，已经成为硅谷的新晋招聘话题。" 这不是玩笑话——Anthropic、OpenAI 等公司已经在内部这样实践。</p>
+
+      <h3>NemoClaw：企业安全版本</h3>
+      <p>OpenClaw 的致命弱点是：在企业内部部署时可能泄露商业机密。为此，NVIDIA 推出了 NemoClaw 参考设计，集成了网络护栏和隐私路由器，使 OpenClaw 达到"企业就绪"状态。</p>
+
+      <hr>
+
+      <h2>五、物理 AI：自动驾驶与机器人元年</h2>
+      <p>黄仁勋在 GTC 2026 上明确表示："自动驾驶汽车的 ChatGPT 时刻已经到来。物理世界已正式接入 AI 协议栈。"</p>
+
+      <h3>RoboTaxi 朋友圈大扩张</h3>
+      <p>GTC 2026 新增四大车企加入 NVIDIA RoboTaxi Ready 平台：</p>
+      <ul>
+        <li>比亚迪（年产能超 500 万辆）</li>
+        <li>现代</li>
+        <li>日产</li>
+        <li>吉利（年总产能约 1800 万辆）</li>
+      </ul>
+      <p>加上此前的奔驰、丰田、通用，NVIDIA 在自动驾驶领域已经覆盖了全球绝大多数头部车企。</p>
+
+      <h3>110 款机器人在 GTC 亮相</h3>
+      <p>GTC 2026 有 110 款机器人现场展示。迪士尼雪宝机器人（Olaf）也在现场登台，与黄仁勋互动并完成了整场演讲的收尾。</p>
+
+      <h3>合成数据：现实世界数据的替代品</h3>
+      <p>黄仁勋指出了一个关键限制：现实世界的机器人数据永远不够。解决方案是 Omniverse 仿真平台——用合成数据训练 AI，让机器人在虚拟世界中完成大部分学习，再部署到现实场景。这将大幅加速机器人的训练迭代速度。</p>
+
+      <hr>
+
+      <h2>六、硬件路线图：从 Blackwell 到 Feynman</h2>
+      <p>黄仁勋展示了 NVIDIA 的完整技术路线图，每一代产品都实现了数量级的性能提升：</p>
+
+      <h3>Blackwell（当前量产）</h3>
+      <ul>
+        <li>NVLink 72 核全连接（Hopper 仅 8 核共享 NVLink）</li>
+        <li>NVFP4 精度张量核心（不损失精度的大幅性能提升）</li>
+        <li>已获微软 Azure、亚马逊 AWS、谷歌云、Oracle 等全面采用</li>
+      </ul>
+
+      <h3>Vera Rubin（当前量产）</h3>
+      <ul>
+        <li>3.6 Exaflops 算力（NVLink 72 配置）</li>
+        <li>带宽 260 TB/s</li>
+        <li>100% 液冷，安装时间从两天缩短至两小时</li>
+        <li>全球唯一采用 LPDDR5 内存的数据中心 CPU（Vera CPU）</li>
+        <li>首款 Vera Rubin 机架已在微软 Azure 上线运行</li>
+      </ul>
+
+      <h3>Rubin Ultra（即将推出）</h3>
+      <ul>
+        <li>全新 Kyber 机架设计</li>
+        <li>单一 NVLink 域内连接 144 个 GPU（当前 Blackwell 是 72 个）</li>
+        <li>集成下一代 LPU 35</li>
+      </ul>
+
+      <h3>Feynman（未来架构）</h3>
+      <p>全新 GPU、LPU 40（与 Groq 团队联合打造）、全新 CPU Rosa、Bluefield-5、CX-10 SuperNIC。将同时支持铜互连和共封装光学（CPO）两种扩展路径。</p>
+
+      <hr>
+
+      <h2>七、黄仁勋 vs. 美国政府：一场罕见的政策分歧</h2>
+      <p>2026年4月16日，黄仁勋在 Dwarkesh Patel 播客中罕见地直接批评了美国的芯片出口管制政策，引发科技圈广泛讨论。</p>
+
+      <blockquote>
+        <p>"50% 的 AI 开发者在中国。被迫离开中国，会加速他们整个 AI 生态聚焦于内部架构——这正是你政策造成的意外后果。"</p>
+        <p>"这种失败者的前提——放弃一个市场——我无法接受。美国不是失败者，我们的产业也不是失败者。"</p>
+      </blockquote>
+
+      <h3>他的核心论点</h3>
+      <ul>
+        <li>中国芯片产能占全球主流芯片 <strong>60% 以上</strong>，SMIC 等制造能力已足够</li>
+        <li>DeepSeek 证明了出色的算法优化能带来 <strong>10 倍以上的性能提升</strong></li>
+        <li>限制中国芯片 → 中国被迫自研 → 加速独立生态 → 最终反而削弱美国芯片竞争优势</li>
+      </ul>
+      <p>这不是商业游说，而是黄仁勋从竞争战略角度对政策逻辑的正面反驳。</p>
+
+      <hr>
+
+      <h2>八、核心判断：未来 3–5 年 AI 的样子</h2>
+      <p>综合黄仁勋在不同场合的表述，可以归纳出他对 AI 未来的五个核心判断：</p>
+      <ol>
+        <li><strong>推理将取代训练成为最大算力消耗</strong>：AI 应用规模化后，每一次用户请求都是推理，推理算力需求将是训练的 100 倍以上</li>
+        <li><strong>每瓦 Token 吞吐量决定竞争胜负</strong>：在电力约束下，芯片的能效比（每瓦产出 Token 数）将成为选择芯片的核心指标</li>
+        <li><strong>Agent 渗透所有行业</strong>：不只是科技公司，所有传统行业的企业都需要建立 Agent 能力，否则将被淘汰</li>
+        <li><strong>物理 AI 是下一个爆发点</strong>：自动驾驶、机器人、具身智能将从"早期探索"进入"大规模商业化"阶段</li>
+        <li><strong>主权 AI 是各国刚需</strong>：每个国家都需要有自己的 AI 基础设施和数据，不能依赖他国</li>
+      </ol>
+
+      <hr>
+
+      <h2>黄仁勋方法论：底层哲学</h2>
+      <p>黄仁勋在多场访谈中反复提及的底层哲学，或许是理解他判断的钥匙：</p>
+      <blockquote>
+        <p>"<strong>做所有必要的事，尽可能少做不必要的事。</strong>我们不是一家什么都做的公司，我们做的是那些如果不自己做就做不好的事。"</p>
+      </blockquote>
+      <blockquote>
+        <p>"<strong>你不会因为 AI 而失去工作，但你会因为使用 AI 的人而失去工作。</strong>——所以学会使用 AI，不是选择，而是必然。"</p>
+      </blockquote>
+
+      <hr>
+      <p><em>数据来源：GTC 2026 官方发布（nvidia.cn）、华尔街见闻 GTC 2026 全文整理、Dwarkesh Patel 播客访谈（2026.4.16）、腾讯新闻 GTC 2026 全文实录。内容仅供参考，不构成投资建议。</em></p>
+    `
+  },
+  {
     id: 22,
     title: "每日大佬说 · 2026-04-18",
     date: "2026-04-18",
     tag: "投资",
     tagClass: "tag-invest",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=85&fit=crop",
     content: `
       <p>「大佬说」每日更新，记录当天最值得关注的投资与商业人物观点。选标准：① 有具体数据支撑；② 有超越一时一事的判断价值；③ 言之有物，不灌水。</p>
 
@@ -1061,7 +1278,7 @@ const posts = [
     date: "2026-04-17",
     tag: "投资",
     tagClass: "tag-invest",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop",
     content: `
       <p>以下为今日（2026-04-17）三只重点基金的每日信号卡，包含价格、涨跌幅、均线偏离度（MA250）以及 RSI 指标，辅助判断当前市场位置与定投节奏。</p>
       <div class="post-signal-imgs">
@@ -1151,7 +1368,7 @@ const posts = [
     date: "2026-04-08",
     tag: "投资",
     tagClass: "tag-invest",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&fit=crop",
     content: `
       <p>投资是一件需要长期坚持的事，而数据的记录和追踪往往是最费时间的环节。我花了几天时间，用 AI 辅助搭建了一套自动化投资追踪系统，现在每天只需要打开网页就能看到所有持仓情况。</p>
       <h2>工具选型</h2>
@@ -1269,7 +1486,7 @@ const posts = [
     date: "2026-03-10",
     tag: "投资",
     tagClass: "tag-invest",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    img: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1200&q=85&fit=crop",
     content: `
       <p>红利低波50是我定投组合里最稳的一只。2024年大盘跌了将近20%，它只跌了8%，股息率还有5.6%。今年分红到账的时候，账户里的数字比我预想的好看。</p>
       <h2>为什么选它</h2>
@@ -1358,7 +1575,7 @@ const posts = [
     date: "2026-02-08",
     tag: "投资",
     tagClass: "tag-invest",
-    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    img: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1200&q=85&fit=crop",
     content: `
       <p>买股票之前先看估值，这是最基本的原则。但估值不是单看一个 PE 就能判断的，需要多个指标综合来看。我用 Python + AkShare 做了一套自己的估值仪表盘。</p>
       <h2>四个核心指标</h2>
