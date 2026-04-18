@@ -404,7 +404,7 @@
     }
 
     /* Hidden article items */
-    .article-item[data-hidden="true"] { display: none; }
+    #articleList .article-item[data-hidden="true"] { display: none; }
 
     /* ── About ── */
     .about-grid {
@@ -622,312 +622,9 @@
     <button class="filter-btn" data-filter="读书" onclick="setFilter('读书')">读书</button>
   </div>
 
-  <div class="article-list">
+    <div id="articleList"></div>
 
-    
-    
-    <div class="article-item" data-tag="投资" onclick="showPost(24)">
-      <span class="article-num">01</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-04-18</span>
-        </div>
-        <h3 class="article-title">每日大佬说 · 沃伦·巴菲特：投资哲学与最新持仓动态</h3>
-        <p class="article-excerpt">奥马哈先知，伯克希尔·哈撒韦掌舵人，全球最具影响力的价值投资者。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-
-
-<div class="article-item" data-tag="投资" onclick="showPost(23)">
-      <span class="article-num">01</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-04-18</span>
-        </div>
-        <h3 class="article-title">每日大佬说 · 黄仁勋：AI的未来，2026年最新预测</h3>
-        <p class="article-excerpt">Token工厂经济、万亿需求、Agent革命、物理AI——GTC 2026黄仁勋完整观点整理</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(21)">
-      <span class="article-num">01</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-04-17</span>
-        </div>
-        <h3 class="article-title">每日投资信号 · 2026年4月17日</h3>
-        <p class="article-excerpt">纳指100、标普500、红利低波50 三基金今日信号卡，含均线偏离度与 RSI 指标。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="工作" onclick="showPost(1)">
-      <span class="article-num">01</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-work">工作</span>
-          <span class="article-date">2026-04-15</span>
-        </div>
-        <h3 class="article-title">用 AI 工具提升行政执法法制审核效率的实践</h3>
-        <p class="article-excerpt">结合法律知识库与 AI 辅助审查工具，探索法制审核工作的数字化转型路径。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="工作" onclick="showPost(2)">
-      <span class="article-num">02</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-work">工作</span>
-          <span class="article-date">2026-04-12</span>
-        </div>
-        <h3 class="article-title">法制审核文书常见错误清单：100个案例复盘</h3>
-        <p class="article-excerpt">整理近三年案卷评查中发现的典型问题，按类别归纳总结，附正确写法参考。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="效率" onclick="showPost(3)">
-      <span class="article-num">03</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-eff">效率</span>
-          <span class="article-date">2026-04-10</span>
-        </div>
-        <h3 class="article-title">Markdown 写作：为什么我彻底放弃了 Word</h3>
-        <p class="article-excerpt">从 Word 的崩溃与格式灾难，到 Markdown 的简洁与安心。这是一次写作工具的认知升级。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(4)">
-      <span class="article-num">04</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-04-08</span>
-        </div>
-        <h3 class="article-title">从零搭建个人投资追踪系统：工具选型与实践</h3>
-        <p class="article-excerpt">用 Python + Web 工具搭建个人投资组合追踪系统，自动化获取行情数据。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="生活" onclick="showPost(5)">
-      <span class="article-num">05</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-life">生活</span>
-          <span class="article-date">2026-04-05</span>
-        </div>
-        <h3 class="article-title">重庆的秋天：一条被忽略的 Citywalk 路线</h3>
-        <p class="article-excerpt">从鹅岭公园到李子坝，穿过老社区和防空洞隧道，用半天时间重新认识这座山城。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="效率" onclick="showPost(6)">
-      <span class="article-num">06</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-eff">效率</span>
-          <span class="article-date">2026-03-28</span>
-        </div>
-        <h3 class="article-title">Mac mini + 极空间 NAS：我的个人数字中枢</h3>
-        <p class="article-excerpt">Mac mini M4 配合极空间 NAS Z4，这套组合用了半年，聊聊真实使用感受。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(7)">
-      <span class="article-num">07</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-03-22</span>
-        </div>
-        <h3 class="article-title">定投指数基金两年：我在熊市里学到的五件事</h3>
-        <p class="article-excerpt">2024年初开始定投，中间经历了大幅下跌，也经历了回血。这段经历比任何理财书都更直接。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="技术" onclick="showPost(8)">
-      <span class="article-num">08</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-tech">技术</span>
-          <span class="article-date">2026-03-20</span>
-        </div>
-        <h3 class="article-title">博客上线全流程：零基础也能做网站</h3>
-        <p class="article-excerpt">注册 GitHub、推到远程仓库、Vercel 部署上线——完整流程记录，从零到上线只需要半天。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="读书" onclick="showPost(9)">
-      <span class="article-num">09</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-book">读书</span>
-          <span class="article-date">2026-03-15</span>
-        </div>
-        <h3 class="article-title">读书笔记：《卡片笔记写作法》</h3>
-        <p class="article-excerpt">卢曼用卡片盒写了70本书，方法却出奇简单。笔记不是记录，而是思考的工具。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(10)">
-      <span class="article-num">10</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-03-10</span>
-        </div>
-        <h3 class="article-title">红利低波50：熊市里的压舱石</h3>
-        <p class="article-excerpt">银行股高股息+低波动策略，跑赢大盘的同时还能有稳稳的现金流。持有两年的真实感受。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="效率" onclick="showPost(11)">
-      <span class="article-num">11</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-eff">效率</span>
-          <span class="article-date">2026-03-05</span>
-        </div>
-        <h3 class="article-title">Obsidian 入门：我的第二大脑搭建记录</h3>
-        <p class="article-excerpt">从 Notion 迁移到 Obsidian，用双链笔记管理知识。一年积累200+卡片，写作效率明显提升。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="生活" onclick="showPost(12)">
-      <span class="article-num">12</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-life">生活</span>
-          <span class="article-date">2026-02-28</span>
-        </div>
-        <h3 class="article-title">深夜在洪崖洞对面看重庆：有一种安静叫嘉陵江</h3>
-        <p class="article-excerpt">大剧院江边那块石头，是我在重庆最喜欢的地方。没人，轻轨从头顶过，江面比对面安静十倍。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="技术" onclick="showPost(13)">
-      <span class="article-num">13</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-tech">技术</span>
-          <span class="article-date">2026-02-20</span>
-        </div>
-        <h3 class="article-title">用极空间 NAS 打造全自动化媒体库</h3>
-        <p class="article-excerpt">Radarr+Sonarr+Jellyfin三件套，手机点一下新剧自动下载、自动整理、自动刮削海报封面。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="工作" onclick="showPost(14)">
-      <span class="article-num">14</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-work">工作</span>
-          <span class="article-date">2026-02-15</span>
-        </div>
-        <h3 class="article-title">执法记录仪数据的规范化管理实践</h3>
-        <p class="article-excerpt">执法视音频资料是案件的关键证据。整理归档不规范，调取时找不到，一出问题就是大事。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(15)">
-      <span class="article-num">15</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-02-08</span>
-        </div>
-        <h3 class="article-title">用 Python + AkShare 给自己做一个估值仪表盘</h3>
-        <p class="article-excerpt">PE、PB、股债利差、均线偏离度——四个指标做成一张图，熊市不慌，牛市不浪。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="效率" onclick="showPost(16)">
-      <span class="article-num">16</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-eff">效率</span>
-          <span class="article-date">2026-02-01</span>
-        </div>
-        <h3 class="article-title">晨间routine：公务员版通勤时间的最大化利用</h3>
-        <p class="article-excerpt">单程40分钟地铁，一年250+小时在路上。用这段时间做「输入」，通勤反而成了最期待的时间段。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="生活" onclick="showPost(17)">
-      <span class="article-num">17</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-life">生活</span>
-          <span class="article-date">2026-01-25</span>
-        </div>
-        <h3 class="article-title">一个人吃饭的乐趣：重庆小面地图 2.0</h3>
-        <p class="article-excerpt">一个人不想做饭的时候，最适合钻进街边小面馆。整理了一份重庆小面地图，按辣度分档。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="技术" onclick="showPost(18)">
-      <span class="article-num">18</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-tech">技术</span>
-          <span class="article-date">2026-01-18</span>
-        </div>
-        <h3 class="article-title">AI 帮我写材料这一年：真实体验与避坑</h3>
-        <p class="article-excerpt">把 AI 用在工作写作里整整一年，从最初的新鲜到现在的日常依赖，说说哪些真的有用，哪些是坑。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="读书" onclick="showPost(19)">
-      <span class="article-num">19</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-book">读书</span>
-          <span class="article-date">2026-01-10</span>
-        </div>
-        <h3 class="article-title">读《反脆弱》：从不确定性里获益这件事</h3>
-        <p class="article-excerpt">塔勒布说，脆弱的反面不是坚强，而是从冲击中成长。重新理解了为什么定投策略比择时更合理。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-    <div class="article-item" data-tag="投资" onclick="showPost(20)">
-      <span class="article-num">20</span>
-      <div class="article-info">
-        <div class="article-meta">
-          <span class="tag tag-invest">投资</span>
-          <span class="article-date">2026-01-05</span>
-        </div>
-        <h3 class="article-title">2025年终总结：投资收益率跑赢了沪深300</h3>
-        <p class="article-excerpt">全年收益率+8.3%，跑赢沪深300约12个点。策略没有秘密——低波红利+纳指+标普500，简单重复。</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=300&q=75&fit=crop" class="article-thumb" alt="">
-    </div>
-
-  </div>
+  <!-- 分页 --></div>
 
   <!-- 分页 -->
   <div class="pagination" id="pagination">
@@ -1041,12 +738,31 @@ window.addEventListener('scroll', () => {
 });
 
 // ── 分页 + 筛选 ──
+function buildArticleList() {
+  const container = document.getElementById('articleList');
+  if (!container) return;
+  container.innerHTML = posts.map(post => `
+    <div class="article-item" data-tag="${post.tag}" onclick="showPost(${post.id})">
+      <span class="article-num"></span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag ${post.tagClass}">${post.tag}</span>
+          <span class="article-date">${post.date}</span>
+        </div>
+        <h3 class="article-title">${post.title}</h3>
+        <p class="article-excerpt">${post.excerpt || ''}</p>
+      </div>
+      <img src="${post.img}" class="article-thumb" alt="">
+    </div>
+  `).join('');
+}
+
 const PAGE_SIZE = 10;
 let currentFilter = 'all';
 let currentPage = 1;
 
 function getVisibleItems() {
-  return Array.from(document.querySelectorAll('.article-item'));
+  return Array.from(document.querySelectorAll('#articleList .article-item'));
 }
 
 function getFilteredItems() {
@@ -1115,7 +831,7 @@ function nextPage() {
 }
 
 // Init on load
-document.addEventListener('DOMContentLoaded', renderPage);
+document.addEventListener('DOMContentLoaded', () => { buildArticleList(); renderPage(); });
 </script>
 
 </body>
