@@ -152,72 +152,24 @@
 
     .nav-links a:hover { color: var(--text); }
 
-    /* ── Signal Section ── */
-    .signal-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 48px;
-      margin-top: 60px;
-    }
-
-    .signal-header {
+    /* ── Signal images in article ── */
+    .post-signal-imgs {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 36px;
-      flex-wrap: wrap;
-      gap: 16px;
+      flex-direction: column;
+      gap: 24px;
+      margin: 24px 0;
     }
-
-    .signal-header h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .signal-date {
-      font-size: 0.8rem;
-      color: var(--text2);
-      background: var(--surface2);
-      padding: 4px 12px;
-      border-radius: 99px;
-      border: 1px solid var(--border);
-    }
-
-    .signal-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .signal-card {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-    }
-
-    .signal-card img {
+    .post-signal-imgs img {
       width: 100%;
-      height: auto;
-      display: block;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
-
-    .signal-card-label {
-      padding: 12px 16px;
+    .post-signal-imgs .img-label {
       font-size: 0.78rem;
-      font-weight: 600;
       color: var(--text2);
+      text-align: center;
+      margin-top: -16px;
       letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
-
-    @media (max-width: 900px) {
-      .signal-grid { grid-template-columns: 1fr; }
-      .signal-section { padding: 28px 20px; }
     }
 
     /* ── Section ── */
@@ -634,7 +586,6 @@
   <a href="#" class="nav-logo">博客</a>
   <ul class="nav-links">
     <li><a href="#articles">文章</a></li>
-    <li><a href="#signal">投资信号</a></li>
     <li><a href="#about">关于</a></li>
   </ul>
 </nav>
@@ -660,28 +611,6 @@
   <h2 class="section-title">全部文章</h2>
   <p class="section-desc">记录工作中的思考、投资里的实践、生活中的发现。</p>
 
-  <!-- 投资信号 -->
-  <div class="signal-section" id="signal">
-    <div class="signal-header">
-      <h3>每日投资信号</h3>
-      <span class="signal-date">2026-04-17</span>
-    </div>
-    <div class="signal-grid">
-      <div class="signal-card">
-        <img src="generated-images/v2_纳指100_2026-04-17.png" alt="纳指100">
-        <div class="signal-card-label">纳指100</div>
-      </div>
-      <div class="signal-card">
-        <img src="generated-images/v2_标普500_2026-04-17.png" alt="标普500">
-        <div class="signal-card-label">标普500</div>
-      </div>
-      <div class="signal-card">
-        <img src="generated-images/v2_红利低波50_2026-04-17.png" alt="红利低波50">
-        <div class="signal-card-label">红利低波50</div>
-      </div>
-    </div>
-  </div>
-
   <!-- 标签筛选 -->
   <div class="filter-bar">
     <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">全部</button>
@@ -694,6 +623,19 @@
   </div>
 
   <div class="article-list">
+
+    <div class="article-item" data-tag="投资" onclick="showPost(21)">
+      <span class="article-num">01</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-04-17</span>
+        </div>
+        <h3 class="article-title">每日投资信号 · 2026年4月17日</h3>
+        <p class="article-excerpt">纳指100、标普500、红利低波50 三基金今日信号卡，含均线偏离度与 RSI 指标。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
 
     <div class="article-item" data-tag="工作" onclick="showPost(1)">
       <span class="article-num">01</span>
@@ -1001,6 +943,32 @@
 
 <script>
 const posts = [
+  {
+    id: 21,
+    title: "每日投资信号 · 2026年4月17日",
+    date: "2026-04-17",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    content: `
+      <p>以下为今日（2026-04-17）三只重点基金的每日信号卡，包含价格、涨跌幅、均线偏离度（MA250）以及 RSI 指标，辅助判断当前市场位置与定投节奏。</p>
+      <div class="post-signal-imgs">
+        <div>
+          <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/generated-images/v2_%E7%BA%B3%E6%8C%87100_2026-04-17.png" alt="纳指100">
+          <p class="img-label">纳指100</p>
+        </div>
+        <div>
+          <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/generated-images/v2_%E6%A0%87%E6%99%AE500_2026-04-17.png" alt="标普500">
+          <p class="img-label">标普500</p>
+        </div>
+        <div>
+          <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/generated-images/v2_%E7%BA%A2%E5%88%A9%E4%BD%8E%E6%B3%A250_2026-04-17.png" alt="红利低波50">
+          <p class="img-label">红利低波50</p>
+        </div>
+      </div>
+      <blockquote>数据来源：东方财富/AkShare 行情接口，仅供参考，不构成投资建议。</blockquote>
+    `
+  },
   {
     id: 1,
     title: "用 AI 工具提升行政执法法制审核效率的实践",
