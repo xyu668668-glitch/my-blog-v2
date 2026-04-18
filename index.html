@@ -152,6 +152,26 @@
 
     .nav-links a:hover { color: var(--text); }
 
+    /* ── Signal images in article ── */
+    .post-signal-imgs {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin: 24px 0;
+    }
+    .post-signal-imgs img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .post-signal-imgs .img-label {
+      font-size: 0.78rem;
+      color: var(--text2);
+      text-align: center;
+      margin-top: -16px;
+      letter-spacing: 0.06em;
+    }
+
     /* ── Section ── */
     .section {
       max-width: 1100px;
@@ -604,6 +624,19 @@
 
   <div class="article-list">
 
+    <div class="article-item" data-tag="投资" onclick="showPost(21)">
+      <span class="article-num">01</span>
+      <div class="article-info">
+        <div class="article-meta">
+          <span class="tag tag-invest">投资</span>
+          <span class="article-date">2026-04-17</span>
+        </div>
+        <h3 class="article-title">每日投资信号 · 2026年4月17日</h3>
+        <p class="article-excerpt">纳指100、标普500、红利低波50 三基金今日信号卡，含均线偏离度与 RSI 指标。</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
+    </div>
+
     <div class="article-item" data-tag="工作" onclick="showPost(1)">
       <span class="article-num">01</span>
       <div class="article-info">
@@ -885,7 +918,7 @@
       <h3>关于我</h3>
       <p>记录工作里的思考、投资中的实践、生活中的发现。坚信好的工具和方法能让每一天都更从容。</p>
       <div class="about-stats">
-        <div class="stat"><span class="stat-num">20</span><span class="stat-label">文章</span></div>
+        <div class="stat"><span class="stat-num">21</span><span class="stat-label">文章</span></div>
         <div class="stat"><span class="stat-num">3</span><span class="stat-label">只基金</span></div>
         <div class="stat"><span class="stat-num">∞</span><span class="stat-label">折腾中</span></div>
       </div>
@@ -910,6 +943,32 @@
 
 <script>
 const posts = [
+  {
+    id: 21,
+    title: "每日投资信号 · 2026年4月17日",
+    date: "2026-04-17",
+    tag: "投资",
+    tagClass: "tag-invest",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=85&fit=crop",
+    content: `
+      <p>以下为今日（2026-04-17）三只重点基金的每日信号卡，包含价格、涨跌幅、均线偏离度（MA250）以及 RSI 指标，辅助判断当前市场位置与定投节奏。</p>
+      <div class="post-signal-imgs">
+        <div>
+          <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/generated-images/v2_NASDAQ100_2026-04-17.png" alt="纳指100">
+          <p class="img-label">纳指100</p>
+        </div>
+        <div>
+          <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/generated-images/v2_SP500_2026-04-17.png" alt="标普500">
+          <p class="img-label">标普500</p>
+        </div>
+        <div>
+          <img src="https://raw.githubusercontent.com/xyu668668-glitch/my-blog-v2/main/generated-images/v2_CSI500_2026-04-17.png" alt="红利低波50">
+          <p class="img-label">红利低波50</p>
+        </div>
+      </div>
+      <blockquote>数据来源：东方财富/AkShare 行情接口，仅供参考，不构成投资建议。</blockquote>
+    `
+  },
   {
     id: 1,
     title: "用 AI 工具提升行政执法法制审核效率的实践",
