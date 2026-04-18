@@ -276,6 +276,116 @@
       .article-num { font-size: 2rem; }
     }
 
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      padding: 6px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Pagination ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 60px;
+    }
+
+    .page-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .page-nums {
+      display: flex;
+      gap: 6px;
+    }
+
+    .page-num {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      padding: 0 6px;
+    }
+
+    .page-num:hover { border-color: var(--accent); color: var(--accent); }
+    .page-num.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .page-ellipsis {
+      color: var(--text2);
+      font-size: 0.85rem;
+      padding: 0 4px;
+    }
+
+    .result-count {
+      text-align: center;
+      color: var(--text2);
+      font-size: 0.8rem;
+      margin-top: 20px;
+      margin-bottom: -20px;
+    }
+
+    /* Hidden article items */
+    .article-item[data-hidden="true"] { display: none; }
+
     /* ── About ── */
     .about-grid {
       display: grid;
@@ -481,9 +591,20 @@
   <h2 class="section-title">全部文章</h2>
   <p class="section-desc">记录工作中的思考、投资里的实践、生活中的发现。</p>
 
+  <!-- 标签筛选 -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">全部</button>
+    <button class="filter-btn" data-filter="工作" onclick="setFilter('工作')">工作</button>
+    <button class="filter-btn" data-filter="投资" onclick="setFilter('投资')">投资</button>
+    <button class="filter-btn" data-filter="效率" onclick="setFilter('效率')">效率</button>
+    <button class="filter-btn" data-filter="技术" onclick="setFilter('技术')">技术</button>
+    <button class="filter-btn" data-filter="生活" onclick="setFilter('生活')">生活</button>
+    <button class="filter-btn" data-filter="读书" onclick="setFilter('读书')">读书</button>
+  </div>
+
   <div class="article-list">
 
-    <div class="article-item" onclick="showPost(1)">
+    <div class="article-item" data-tag="工作" onclick="showPost(1)">
       <span class="article-num">01</span>
       <div class="article-info">
         <div class="article-meta">
@@ -496,7 +617,7 @@
       <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(2)">
+    <div class="article-item" data-tag="工作" onclick="showPost(2)">
       <span class="article-num">02</span>
       <div class="article-info">
         <div class="article-meta">
@@ -509,7 +630,7 @@
       <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(3)">
+    <div class="article-item" data-tag="效率" onclick="showPost(3)">
       <span class="article-num">03</span>
       <div class="article-info">
         <div class="article-meta">
@@ -522,7 +643,7 @@
       <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(4)">
+    <div class="article-item" data-tag="投资" onclick="showPost(4)">
       <span class="article-num">04</span>
       <div class="article-info">
         <div class="article-meta">
@@ -535,7 +656,7 @@
       <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(5)">
+    <div class="article-item" data-tag="生活" onclick="showPost(5)">
       <span class="article-num">05</span>
       <div class="article-info">
         <div class="article-meta">
@@ -548,7 +669,7 @@
       <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(6)">
+    <div class="article-item" data-tag="效率" onclick="showPost(6)">
       <span class="article-num">06</span>
       <div class="article-info">
         <div class="article-meta">
@@ -561,7 +682,7 @@
       <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(7)">
+    <div class="article-item" data-tag="投资" onclick="showPost(7)">
       <span class="article-num">07</span>
       <div class="article-info">
         <div class="article-meta">
@@ -574,7 +695,7 @@
       <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(8)">
+    <div class="article-item" data-tag="技术" onclick="showPost(8)">
       <span class="article-num">08</span>
       <div class="article-info">
         <div class="article-meta">
@@ -587,7 +708,7 @@
       <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(9)">
+    <div class="article-item" data-tag="读书" onclick="showPost(9)">
       <span class="article-num">09</span>
       <div class="article-info">
         <div class="article-meta">
@@ -600,7 +721,7 @@
       <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(10)">
+    <div class="article-item" data-tag="投资" onclick="showPost(10)">
       <span class="article-num">10</span>
       <div class="article-info">
         <div class="article-meta">
@@ -613,7 +734,7 @@
       <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(11)">
+    <div class="article-item" data-tag="效率" onclick="showPost(11)">
       <span class="article-num">11</span>
       <div class="article-info">
         <div class="article-meta">
@@ -626,7 +747,7 @@
       <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(12)">
+    <div class="article-item" data-tag="生活" onclick="showPost(12)">
       <span class="article-num">12</span>
       <div class="article-info">
         <div class="article-meta">
@@ -639,7 +760,7 @@
       <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(13)">
+    <div class="article-item" data-tag="技术" onclick="showPost(13)">
       <span class="article-num">13</span>
       <div class="article-info">
         <div class="article-meta">
@@ -652,7 +773,7 @@
       <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(14)">
+    <div class="article-item" data-tag="工作" onclick="showPost(14)">
       <span class="article-num">14</span>
       <div class="article-info">
         <div class="article-meta">
@@ -665,7 +786,7 @@
       <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(15)">
+    <div class="article-item" data-tag="投资" onclick="showPost(15)">
       <span class="article-num">15</span>
       <div class="article-info">
         <div class="article-meta">
@@ -678,7 +799,7 @@
       <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(16)">
+    <div class="article-item" data-tag="效率" onclick="showPost(16)">
       <span class="article-num">16</span>
       <div class="article-info">
         <div class="article-meta">
@@ -691,7 +812,7 @@
       <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(17)">
+    <div class="article-item" data-tag="生活" onclick="showPost(17)">
       <span class="article-num">17</span>
       <div class="article-info">
         <div class="article-meta">
@@ -704,7 +825,7 @@
       <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(18)">
+    <div class="article-item" data-tag="技术" onclick="showPost(18)">
       <span class="article-num">18</span>
       <div class="article-info">
         <div class="article-meta">
@@ -717,7 +838,7 @@
       <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(19)">
+    <div class="article-item" data-tag="读书" onclick="showPost(19)">
       <span class="article-num">19</span>
       <div class="article-info">
         <div class="article-meta">
@@ -730,7 +851,7 @@
       <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75&fit=crop" class="article-thumb" alt="">
     </div>
 
-    <div class="article-item" onclick="showPost(20)">
+    <div class="article-item" data-tag="投资" onclick="showPost(20)">
       <span class="article-num">20</span>
       <div class="article-info">
         <div class="article-meta">
@@ -744,6 +865,14 @@
     </div>
 
   </div>
+
+  <!-- 分页 -->
+  <div class="pagination" id="pagination">
+    <button class="page-btn" id="prevBtn" onclick="prevPage()">←</button>
+    <div class="page-nums" id="pageNums"></div>
+    <button class="page-btn" id="nextBtn" onclick="nextPage()">→</button>
+  </div>
+
 </section>
 
 <hr class="divider">
@@ -1194,6 +1323,83 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePostDir
 window.addEventListener('scroll', () => {
   document.getElementById('backTop').classList.toggle('show', window.scrollY > 600);
 });
+
+// ── 分页 + 筛选 ──
+const PAGE_SIZE = 10;
+let currentFilter = 'all';
+let currentPage = 1;
+
+function getVisibleItems() {
+  return Array.from(document.querySelectorAll('.article-item'));
+}
+
+function getFilteredItems() {
+  const items = getVisibleItems();
+  if (currentFilter === 'all') return items;
+  return items.filter(item => item.dataset.tag === currentFilter);
+}
+
+function getTotalPages(items) {
+  return Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+}
+
+function renderPage() {
+  const items = getFilteredItems();
+  const totalPages = getTotalPages(items);
+
+  // Clamp current page
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+
+  // Show/hide items
+  getVisibleItems().forEach(item => item.dataset.hidden = 'true');
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = items.slice(start, start + PAGE_SIZE);
+  pageItems.forEach(item => item.dataset.hidden = 'false');
+
+  // Build page numbers
+  const pageNums = document.getElementById('pageNums');
+  pageNums.innerHTML = '';
+
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) addPageNum(i, pageNums);
+  } else {
+    addPageNum(1, pageNums);
+    if (currentPage > 3) pageNums.innerHTML += '<span class="page-ellipsis">…</span>';
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+      addPageNum(i, pageNums);
+    }
+    if (currentPage < totalPages - 2) pageNums.innerHTML += '<span class="page-ellipsis">…</span>';
+    addPageNum(totalPages, pageNums);
+  }
+
+  document.getElementById('prevBtn').disabled = currentPage <= 1;
+  document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+}
+
+function addPageNum(i, container) {
+  const btn = document.createElement('button');
+  btn.className = 'page-num' + (i === currentPage ? ' active' : '');
+  btn.textContent = i;
+  btn.onclick = () => { currentPage = i; renderPage(); };
+  container.appendChild(btn);
+}
+
+function setFilter(tag) {
+  currentFilter = tag;
+  currentPage = 1;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === tag));
+  renderPage();
+}
+
+function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+function nextPage() {
+  const items = getFilteredItems();
+  if (currentPage < getTotalPages(items)) { currentPage++; renderPage(); }
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', renderPage);
 </script>
 
 </body>
